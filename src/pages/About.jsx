@@ -163,7 +163,7 @@ export default function About() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-transparent text-slate-800">
+    <main className="w-full min-h-screen bg-white text-slate-800">
       {/* ========================================================
           1. ABOUT HERO BANNER (Clean, Fresh, Architectural)
           ======================================================== */}
