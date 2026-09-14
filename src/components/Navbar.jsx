@@ -86,10 +86,9 @@ export default function Navbar() {
             onClick={() => setMenuOpen(false)}
           >
             <img
-              src="/assets/logo.jpg"
+              src="/assets/logo.png"
               alt="Dimension Composition logo"
-              loading="lazy"
-              className="h-11 w-auto rounded-full object-cover"
+              className="h-11 w-11 rounded-full object-contain bg-white shadow-sm border border-gray-100 p-0.5"
             />
             <div className="leading-tight">
               <p className="text-[13px] sm:text-base font-bold uppercase tracking-[0.16em] text-black">

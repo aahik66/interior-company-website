@@ -18,7 +18,17 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white border-t border-gray-800">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 px-4 sm:px-6 lg:px-8 py-10 sm:py-14 sm:flex-row sm:items-start sm:justify-between">
         <div className="max-w-sm space-y-3">
-          <p className="text-xs uppercase tracking-[0.25em] text-brand-400 font-bold">Dimension Composition</p>
+          <div className="flex items-center gap-3">
+            <img
+              src="/assets/logo.png"
+              alt="Dimension Composition"
+              className="h-11 w-11 rounded-full object-contain bg-white p-0.5 shadow-md"
+            />
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-brand-400 font-bold leading-tight">Dimension</p>
+              <p className="text-sm font-bold tracking-wider text-white leading-tight">Composition</p>
+            </div>
+          </div>
           <p className="text-base sm:text-lg font-semibold text-white">Modern interiors that feel calm, intentional, and beautifully lived in.</p>
           <div className="flex items-center gap-3 pt-1">
             {[
