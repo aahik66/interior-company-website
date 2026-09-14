@@ -350,7 +350,7 @@ export default function Navbar() {
 
             {/* Mobile Quick WhatsApp CTA */}
             <a
-              href="https://wa.me/8801700000000?text=Hello%20Dimension%20Composition!%20I%20want%20to%20get%20a%20free%20interior%20design%20consultation."
+              href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20want%20to%20get%20a%20free%20interior%20design%20consultation."
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-bold text-white shadow-md shadow-green-500/20 transition hover:bg-[#20bd5a]"

@@ -64,7 +64,7 @@ export default function ProjectModal({ project, onClose }) {
   const whatsappMessage = encodeURIComponent(
     `Hello Dimension Composition! I am interested in learning more about the "${project.title}" (${project.category}) interior design project.`
   );
-  const whatsappUrl = `https://wa.me/8801700000000?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/8801739835017?text=${whatsappMessage}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md animate-fadeIn">
