@@ -25,7 +25,7 @@ const categories = [
 
 export default function Categories() {
   return (
-    <section id="categories" className="w-full bg-white py-12 sm:py-20">
+    <section id="categories" className="w-full bg-transparent py-12 sm:py-20">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-2 text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-500">
@@ -44,7 +44,7 @@ export default function Categories() {
             <Link
               key={category.name}
               to={`/portfolio?category=${encodeURIComponent(category.name)}`}
-              className="group overflow-hidden rounded-3xl border border-gray-100 bg-gray-50 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+              className="group overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-[0_14px_40px_-30px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
               data-aos="fade-up"
               data-aos-delay={80 + idx * 40}
             >
