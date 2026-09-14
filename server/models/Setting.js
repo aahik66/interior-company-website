@@ -4,12 +4,13 @@ const settingSchema = new mongoose.Schema(
   {
     companyName: { type: String, default: "Dimension Composition" },
     tagline: { type: String, default: "Luxury Interior Architecture & Turnkey Design Studio" },
-    phoneNumber: { type: String, default: "+8801700000000" },
-    whatsappNumber: { type: String, default: "8801700000000" },
+    phoneNumber: { type: String, default: "+880 1739-835017" },
+    secondaryPhoneNumber: { type: String, default: "+880 1601-370090" },
+    whatsappNumber: { type: String, default: "8801739835017" },
     email: { type: String, default: "contact@dimensioncomposition.com" },
     address: {
       type: String,
-      default: "House #42, Road #11, Block D, Banani, Dhaka-1213, Bangladesh",
+      default: "House -204, Port Road, Block-A, Bashundhara Riverview, Hashnabad, Keraniganj, Dhaka-1310",
     },
     facebookUrl: { type: String, default: "https://facebook.com" },
     instagramUrl: { type: String, default: "https://instagram.com" },
