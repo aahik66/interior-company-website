@@ -16,6 +16,7 @@ import {
   HiOutlineLocationMarker,
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
+import { API_BASE } from "../config/api";
 
 // 4 Core About Categories matching bdinterior.com
 const aboutTabs = [
@@ -119,7 +120,25 @@ const jobOpenings = [
 
 export default function About() {
   const [activeTab, setActiveTab] = useState("overview");
+  const [teamList, setTeamList] = useState(teamMembers);
   const location = useLocation();
+
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/team`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            setTeamList(data);
+          }
+        }
+      } catch (err) {
+        console.warn("Could not load dynamic team members, using defaults:", err);
+      }
+    };
+    fetchTeam();
+  }, []);
 
   useEffect(() => {
     const hash = location.hash.replace("#", "");
@@ -310,9 +329,9 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {teamMembers.map((member, idx) => (
+            {teamList.map((member, idx) => (
               <div
-                key={member.name}
+                key={member._id || member.name || idx}
                 data-aos="fade-up"
                 data-aos-delay={30 + (idx % 3) * 30}
                 className="group rounded-xl overflow-hidden bg-white border border-slate-200 hover:border-slate-300 hover:shadow-md transition flex flex-col justify-between"
