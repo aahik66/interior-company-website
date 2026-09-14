@@ -31,11 +31,7 @@ export default function Register() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="mx-auto w-full max-w-lg rounded-2xl sm:rounded-3xl border border-gray-100 bg-white p-5 sm:p-8 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.35)]">
           <div className="flex items-center gap-3 mb-5">
-            <img
-              src="/assets/logo.png"
-              alt="Dimension Composition"
-              className="h-12 w-12 rounded-full object-contain bg-white shadow-sm border border-gray-100 p-0.5"
-            />
+            <Logo className="h-12 w-12" rounded="rounded-full" />
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-500">Dimension Composition</p>
               <p className="text-xs text-gray-500 font-medium">Design & Architecture Studio</p>
