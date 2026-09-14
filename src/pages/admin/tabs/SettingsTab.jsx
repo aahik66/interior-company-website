@@ -19,10 +19,11 @@ export default function SettingsTab() {
   const [form, setForm] = useState({
     companyName: "Dimension Composition",
     tagline: "Luxury Interior Architecture & Turnkey Design Studio",
-    phoneNumber: "+8801700000000",
-    whatsappNumber: "8801700000000",
+    phoneNumber: "+880 1739-835017",
+    secondaryPhoneNumber: "+880 1601-370090",
+    whatsappNumber: "8801739835017",
     email: "contact@dimensioncomposition.com",
-    address: "House #42, Road #11, Block D, Banani, Dhaka-1213, Bangladesh",
+    address: "House -204, Port Road, Block-A, Bashundhara Riverview, Hashnabad, Keraniganj, Dhaka-1310",
     facebookUrl: "https://facebook.com",
     instagramUrl: "https://instagram.com",
     youtubeUrl: "https://youtube.com",
@@ -168,14 +169,27 @@ export default function SettingsTab() {
 
             <div>
               <label className="block font-bold text-slate-700 mb-1 flex items-center gap-1.5">
-                <HiOutlinePhone className="text-brand-500" /> Display Hotline Phone Number
+                <HiOutlinePhone className="text-brand-500" /> Main Phone / Hotline Number
               </label>
               <input
                 type="text"
                 required
-                placeholder="+880 1700-000000"
-                value={form.phoneNumber}
+                placeholder="+880 1739-835017"
+                value={form.phoneNumber || ""}
                 onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })}
+                className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="block font-bold text-slate-700 mb-1 flex items-center gap-1.5">
+                <HiOutlinePhone className="text-emerald-500" /> Secondary Phone Number
+              </label>
+              <input
+                type="text"
+                placeholder="+880 1601-370090"
+                value={form.secondaryPhoneNumber || ""}
+                onChange={(e) => setForm({ ...form, secondaryPhoneNumber: e.target.value })}
                 className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none"
               />
             </div>
