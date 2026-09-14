@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { HiOutlinePhone, HiOutlineX, HiOutlineChatAlt2 } from "react-icons/hi";
 import { useSettings } from "../context/SettingsContext";
+import Logo from "./Logo";
 
 export default function FloatingContact() {
   const { settings } = useSettings();
@@ -40,12 +41,8 @@ export default function FloatingContact() {
           <div className="flex items-start justify-between border-b border-gray-100 pb-3">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <img
-                  src="/assets/logo.png"
-                  alt="Dimension Composition"
-                  className="h-10 w-10 sm:h-11 sm:w-11 rounded-2xl object-contain bg-white p-0.5 shadow-md"
-                />
-                <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white" />
+                <Logo className="h-10 w-10 sm:h-11 sm:w-11" rounded="rounded-2xl" />
+                <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white z-20" />
               </div>
               <div>
                 <h4 className="text-sm font-bold text-gray-900 leading-tight">

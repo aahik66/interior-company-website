@@ -9,6 +9,7 @@ import ReviewsTab from "./tabs/ReviewsTab";
 import VideosTab from "./tabs/VideosTab";
 import TeamTab from "./tabs/TeamTab";
 import SettingsTab from "./tabs/SettingsTab";
+import Logo from "../../components/Logo";
 
 import {
   HiOutlineViewGrid,
