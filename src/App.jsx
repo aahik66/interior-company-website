@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MotionBackground from "./components/MotionBackground";
 import FloatingContact from "./components/FloatingContact";
+import Preloader from "./components/Preloader";
 
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
@@ -24,6 +25,9 @@ import AdminRoute from "./components/admin/AdminRoute";
 function PublicLayout() {
   return (
     <div className="relative w-full min-h-screen bg-white text-gray-800 overflow-x-hidden">
+      {/* Luxury Cinematic Brand Reveal Preloader on initial load and refresh */}
+      <Preloader />
+
       {/* Subtle Ambient Background */}
       <MotionBackground />
 
