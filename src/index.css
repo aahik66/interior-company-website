@@ -232,3 +232,52 @@ a {
     left: 180%;
   }
 }
+
+/* ========================================================
+   LUXURY ARCHITECTURAL HEADER BAR TEXTURE
+   ======================================================== */
+.header-texture-bar {
+  background-color: rgba(255, 255, 255, 0.93) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  position: relative;
+}
+
+/* Architectural micro-grid & tactile noise texture overlay */
+.header-texture-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    /* Layer 1: Tactile fine architectural grain / linen noise */
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E"),
+    /* Layer 2: Subtle architectural drafting micro-dot grid */
+    radial-gradient(circle, rgba(241, 90, 36, 0.07) 1px, transparent 1px),
+    /* Layer 3: Ultra-light fine drafting grid lines */
+    linear-gradient(to right, rgba(15, 23, 42, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+  background-size: auto, 18px 18px, 18px 18px, 18px 18px;
+  background-position: 0 0, 9px 9px, 0 0, 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Precision luxury border bottom with warm brand accent hairline */
+.header-texture-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.7) 0%,
+    rgba(241, 90, 36, 0.45) 30%,
+    rgba(226, 232, 240, 0.9) 50%,
+    rgba(241, 90, 36, 0.45) 70%,
+    rgba(226, 232, 240, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
