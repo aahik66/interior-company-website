@@ -68,7 +68,7 @@ export default function Reviews() {
   };
 
   return (
-    <section id="reviews" className="w-full bg-white py-12 sm:py-20">
+    <section id="reviews" className="w-full bg-transparent py-12 sm:py-20">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-2 text-center" data-aos="fade-up">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-500">
