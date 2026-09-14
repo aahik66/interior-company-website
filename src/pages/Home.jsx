@@ -9,7 +9,7 @@ import ContactSection from "../components/ContactSection";
 
 export default function Home() {
   return (
-    <main className="relative w-full bg-transparent text-gray-800">
+    <main className="relative w-full bg-gray-50 text-gray-800">
       <Hero />
       <MarqueeStrip />
       <Categories />
