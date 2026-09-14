@@ -9,6 +9,8 @@
     "start": "node server/index.js",
     "serve": "node server/index.js",
     "build": "vite build",
+    "sync": "node scripts/sync.js",
+    "push": "node scripts/sync.js",
     "preview": "vite preview",
     "lint": "eslint ."
   },
