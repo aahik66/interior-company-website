@@ -23,7 +23,7 @@ import AdminRoute from "./components/admin/AdminRoute";
 // Public Layout Wrapper
 function PublicLayout() {
   return (
-    <div className="relative w-full min-h-screen bg-white text-gray-800 overflow-x-hidden">
+    <div className="relative w-full min-h-screen bg-transparent text-gray-800 overflow-x-hidden">
       {/* Subtle Ambient Background */}
       <MotionBackground />
 
