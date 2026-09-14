@@ -11,7 +11,8 @@ export default function Hero() {
   const { settings } = useSettings();
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-  const phoneNumber = settings?.phoneNumber || "+8801700000000";
+  const phoneNumber = settings?.phoneNumber || "+880 1739-835017";
+  const secondaryPhone = settings?.secondaryPhoneNumber || "+880 1601-370090";
   const heroVideoUrl =
     settings?.heroVideoUrl ||
     "https://bdinterior.com/wp-content/uploads/2025/09/homepage-Video-3.mp4";
@@ -35,13 +36,25 @@ export default function Hero() {
             </span>
           </div>
 
-          <a
-            href={`tel:${phoneNumber}`}
-            className="flex items-center gap-1.5 text-[11px] font-medium text-slate-200 hover:text-brand-400 transition ml-auto"
-          >
-            <HiOutlinePhone className="h-3 w-3 text-brand-500 flex-shrink-0" />
-            <span>Hotline: {phoneNumber}</span>
-          </a>
+          <div className="flex items-center gap-2 text-[11px] font-medium text-slate-200 ml-auto">
+            <a
+              href={`tel:${phoneNumber.replace(/\s+/g, "")}`}
+              className="flex items-center gap-1 text-slate-200 hover:text-brand-400 transition"
+              title="Main Hotline"
+            >
+              <HiOutlinePhone className="h-3 w-3 text-brand-500 flex-shrink-0" />
+              <span>{phoneNumber}</span>
+            </a>
+            {secondaryPhone && (
+              <a
+                href={`tel:${secondaryPhone.replace(/\s+/g, "")}`}
+                className="hidden sm:inline-flex items-center gap-1 text-slate-400 hover:text-brand-400 transition"
+                title="Secondary Line"
+              >
+                <span>/ {secondaryPhone}</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
 

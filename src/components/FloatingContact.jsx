@@ -5,8 +5,9 @@ import { useSettings } from "../context/SettingsContext";
 
 export default function FloatingContact() {
   const { settings } = useSettings();
-  const PHONE_NUMBER = settings?.phoneNumber || "+8801700000000";
-  const WHATSAPP_NUMBER = settings?.whatsappNumber || "8801700000000";
+  const PHONE_NUMBER = settings?.phoneNumber || "+880 1739-835017";
+  const SECONDARY_PHONE = settings?.secondaryPhoneNumber || "+880 1601-370090";
+  const WHATSAPP_NUMBER = settings?.whatsappNumber || "8801739835017";
 
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
@@ -39,9 +40,11 @@ export default function FloatingContact() {
           <div className="flex items-start justify-between border-b border-gray-100 pb-3">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-500 to-brand-600 text-white font-bold shadow-md text-sm">
-                  DC
-                </div>
+                <img
+                  src="/assets/logo.png"
+                  alt="Dimension Composition"
+                  className="h-10 w-10 sm:h-11 sm:w-11 rounded-2xl object-contain bg-white p-0.5 shadow-md"
+                />
                 <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white" />
               </div>
               <div>
@@ -105,20 +108,32 @@ export default function FloatingContact() {
           <div className="flex items-center gap-2 pt-2 border-t border-gray-100">
             <button
               onClick={() => openWhatsApp()}
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-[#25D366]/30 transition hover:bg-[#20bd5a] hover:scale-[1.02]"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3.5 py-2.5 text-xs font-bold text-white shadow-md shadow-[#25D366]/30 transition hover:bg-[#20bd5a] hover:scale-[1.02]"
             >
               <FaWhatsapp className="h-4 w-4" />
               Chat on WhatsApp
             </button>
 
             <a
-              href={`tel:${PHONE_NUMBER}`}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 transition hover:bg-brand-500 hover:text-white"
-              title="Call Studio"
-              aria-label="Call studio"
+              href={`tel:${PHONE_NUMBER.replace(/\s+/g, "")}`}
+              className="inline-flex h-9 px-2.5 items-center justify-center gap-1 rounded-xl bg-gray-100 text-gray-800 text-xs font-semibold transition hover:bg-brand-500 hover:text-white"
+              title={`Call Main: ${PHONE_NUMBER}`}
+              aria-label="Call studio main"
             >
-              <HiOutlinePhone className="h-4 w-4" />
+              <HiOutlinePhone className="h-3.5 w-3.5" />
+              <span>Call</span>
             </a>
+
+            {SECONDARY_PHONE && (
+              <a
+                href={`tel:${SECONDARY_PHONE.replace(/\s+/g, "")}`}
+                className="inline-flex h-9 px-2 items-center justify-center rounded-xl bg-gray-100 text-gray-700 text-xs font-bold transition hover:bg-brand-500 hover:text-white"
+                title={`Call Secondary: ${SECONDARY_PHONE}`}
+                aria-label="Call secondary phone"
+              >
+                2nd
+              </a>
+            )}
           </div>
         </div>
       )}
