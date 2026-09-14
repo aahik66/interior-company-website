@@ -10,6 +10,7 @@
     "serve": "node server/index.js",
     "build": "vite build",
     "sync": "node scripts/sync.js",
+    "sync:watch": "node scripts/watch-sync.js",
     "push": "node scripts/sync.js",
     "preview": "vite preview",
     "lint": "eslint ."
