@@ -302,62 +302,246 @@ export default function SettingsTab() {
         </div>
 
         {/* 4. Hero Banner & Background Video Customization */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
+        <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-6">
           <div className="border-b border-slate-100 pb-3">
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-              <span>4. Hero Background Video & Media</span>
+              <span>4. Homepage Hero Section (Video, Headlines & Descriptions)</span>
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
-              Customize the video and poster image shown in the homepage hero banner.
+              Customize or completely delete/remove the main headline, subtitle description, and background video of your homepage hero.
             </p>
           </div>
 
-          <div className="space-y-4 text-xs sm:text-sm">
-            <div>
-              <MediaUploader
-                label="Hero Background Video (.mp4 format)"
-                isVideo
-                accept="video/*"
-                value={form.heroVideoUrl || ""}
-                onChange={(url) => setForm({ ...form, heroVideoUrl: url })}
-                helperText="Upload an MP4 video directly from your computer or paste an external video link."
-              />
+          <div className="space-y-6 text-xs sm:text-sm">
+            {/* Background Media */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <MediaUploader
+                  label="Hero Background Video (.mp4 format)"
+                  isVideo
+                  accept="video/*"
+                  value={form.heroVideoUrl || ""}
+                  onChange={(url) => setForm({ ...form, heroVideoUrl: url })}
+                  helperText="Upload an MP4 video directly from your computer or paste an external video link."
+                />
+              </div>
+
+              <div>
+                <MediaUploader
+                  label="Hero Fallback Poster Image"
+                  accept="image/*"
+                  value={form.heroPosterUrl || ""}
+                  onChange={(url) => setForm({ ...form, heroPosterUrl: url })}
+                  helperText="Shown before video loads or on slower mobile connections. Upload image or paste link."
+                />
+              </div>
             </div>
 
-            <div>
-              <MediaUploader
-                label="Hero Fallback Poster Image"
-                accept="image/*"
-                value={form.heroPosterUrl || ""}
-                onChange={(url) => setForm({ ...form, heroPosterUrl: url })}
-                helperText="Shown before video loads or on slower mobile connections. Upload image or paste link."
-              />
-            </div>
+            {/* Divider */}
+            <div className="border-t border-slate-100 pt-4 space-y-5">
+              {/* Pill Badge */}
+              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="showHeroBadge"
+                      checked={form.showHeroBadge !== false}
+                      onChange={(e) => setForm({ ...form, showHeroBadge: e.target.checked })}
+                      className="h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
+                    />
+                    <label htmlFor="showHeroBadge" className="font-bold text-slate-800 cursor-pointer">
+                      Top Pill Badge / Tagline
+                    </label>
+                  </div>
 
-            <div>
-              <label className="block font-bold text-slate-700 mb-1">
-                Hero Main Headline (H1)
-              </label>
-              <input
-                type="text"
-                placeholder="Leading Interior Design Company in Bangladesh"
-                value={form.heroTitle || ""}
-                onChange={(e) => setForm({ ...form, heroTitle: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none"
-              />
-            </div>
+                  <button
+                    type="button"
+                    onClick={() => setForm({ ...form, heroBadge: "", showHeroBadge: false })}
+                    className="inline-flex items-center gap-1 text-[11px] text-red-600 hover:text-red-700 hover:underline"
+                  >
+                    <HiOutlineTrash className="h-3.5 w-3.5" /> Delete / Clear Badge
+                  </button>
+                </div>
 
-            <div>
-              <label className="block font-bold text-slate-700 mb-1">
-                Hero Subtitle Description
-              </label>
-              <textarea
-                rows={2}
-                placeholder="Award-winning interior architecture and turnkey design studio in Bangladesh..."
-                value={form.heroSubtitle || ""}
-                onChange={(e) => setForm({ ...form, heroSubtitle: e.target.value })}
-                className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none"
-              />
+                <input
+                  type="text"
+                  placeholder="Welcome to Dimension Composition"
+                  value={form.heroBadge || ""}
+                  onChange={(e) => setForm({ ...form, heroBadge: e.target.value })}
+                  disabled={form.showHeroBadge === false}
+                  className="w-full rounded-xl border border-slate-200 bg-white p-2.5 focus:border-brand-500 focus:outline-none disabled:opacity-50"
+                />
+              </div>
+
+              {/* Main Headline (H1) */}
+              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="showHeroTitle"
+                      checked={form.showHeroTitle !== false}
+                      onChange={(e) => setForm({ ...form, showHeroTitle: e.target.checked })}
+                      className="h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
+                    />
+                    <label htmlFor="showHeroTitle" className="font-bold text-slate-800 cursor-pointer">
+                      Hero Main Headline (H1)
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          heroTitle: "Leading Interior Design Company in Bangladesh",
+                          heroHighlightText: "Bangladesh",
+                          showHeroTitle: true,
+                        })
+                      }
+                      className="inline-flex items-center gap-1 text-[11px] text-slate-500 hover:text-slate-700 hover:underline"
+                    >
+                      <HiOutlineRefresh className="h-3.5 w-3.5" /> Reset Default
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setForm({ ...form, heroTitle: "", showHeroTitle: false })}
+                      className="inline-flex items-center gap-1 text-[11px] text-red-600 hover:text-red-700 font-semibold hover:underline"
+                    >
+                      <HiOutlineTrash className="h-3.5 w-3.5" /> Delete / Clear Headline
+                    </button>
+                  </div>
+                </div>
+
+                <input
+                  type="text"
+                  placeholder="e.g. Leading Interior Design Company in Bangladesh"
+                  value={form.heroTitle || ""}
+                  onChange={(e) => setForm({ ...form, heroTitle: e.target.value })}
+                  disabled={form.showHeroTitle === false}
+                  className="w-full rounded-xl border border-slate-200 bg-white p-2.5 focus:border-brand-500 focus:outline-none font-medium disabled:opacity-50"
+                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <div>
+                    <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                      Accent Highlight Word (colored in brand gold/orange)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Bangladesh"
+                      value={form.heroHighlightText || ""}
+                      onChange={(e) => setForm({ ...form, heroHighlightText: e.target.value })}
+                      disabled={form.showHeroTitle === false}
+                      className="w-full rounded-xl border border-slate-200 bg-white p-2 text-xs focus:border-brand-500 focus:outline-none disabled:opacity-50"
+                    />
+                  </div>
+                  <div className="flex items-end">
+                    <p className="text-[11px] text-slate-400">
+                      Tip: If you want no highlighted word, just leave this field empty.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Subtitle Description */}
+              <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="showHeroSubtitle"
+                      checked={form.showHeroSubtitle !== false}
+                      onChange={(e) => setForm({ ...form, showHeroSubtitle: e.target.checked })}
+                      className="h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
+                    />
+                    <label htmlFor="showHeroSubtitle" className="font-bold text-slate-800 cursor-pointer">
+                      Hero Subtitle / Description
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setForm({
+                          ...form,
+                          heroSubtitle:
+                            "Award-winning interior architecture and turnkey design studio in Bangladesh. 15+ years experience, 700+ successful projects. Get expert design consultation for your dream home & corporate office.",
+                          showHeroSubtitle: true,
+                        })
+                      }
+                      className="inline-flex items-center gap-1 text-[11px] text-slate-500 hover:text-slate-700 hover:underline"
+                    >
+                      <HiOutlineRefresh className="h-3.5 w-3.5" /> Reset Default
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setForm({ ...form, heroSubtitle: "", showHeroSubtitle: false })}
+                      className="inline-flex items-center gap-1 text-[11px] text-red-600 hover:text-red-700 font-semibold hover:underline"
+                    >
+                      <HiOutlineTrash className="h-3.5 w-3.5" /> Delete / Clear Subtitle
+                    </button>
+                  </div>
+                </div>
+
+                <textarea
+                  rows={3}
+                  placeholder="Enter custom description or leave blank..."
+                  value={form.heroSubtitle || ""}
+                  onChange={(e) => setForm({ ...form, heroSubtitle: e.target.value })}
+                  disabled={form.showHeroSubtitle === false}
+                  className="w-full rounded-xl border border-slate-200 bg-white p-2.5 focus:border-brand-500 focus:outline-none disabled:opacity-50"
+                />
+              </div>
+
+              {/* Live Preview Card */}
+              <div className="rounded-2xl bg-slate-950 border border-slate-800 p-5 text-white space-y-3">
+                <div className="flex items-center justify-between text-[11px] text-slate-400 border-b border-slate-800 pb-2">
+                  <span className="font-semibold uppercase tracking-wider text-brand-400">
+                    Live Hero Text Preview
+                  </span>
+                  <span>(How visitors will see it on homepage)</span>
+                </div>
+
+                <div className="space-y-3 py-2">
+                  {form.showHeroBadge !== false && form.heroBadge?.trim() && (
+                    <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-slate-200">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+                      <span>{form.heroBadge}</span>
+                    </div>
+                  )}
+
+                  {form.showHeroTitle !== false && form.heroTitle?.trim() ? (
+                    <h4 className="text-xl sm:text-2xl font-black text-white leading-snug">
+                      {form.heroHighlightText?.trim() &&
+                      form.heroTitle.toLowerCase().includes(form.heroHighlightText.toLowerCase())
+                        ? form.heroTitle.split(new RegExp(`(${form.heroHighlightText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi")).map((part, i) =>
+                            part.toLowerCase() === form.heroHighlightText.toLowerCase() ? (
+                              <span key={i} className="text-brand-500">
+                                {part}
+                              </span>
+                            ) : (
+                              <span key={i}>{part}</span>
+                            )
+                          )
+                        : form.heroTitle}
+                    </h4>
+                  ) : (
+                    <p className="text-xs text-slate-500 italic">[Headline is currently deleted / hidden]</p>
+                  )}
+
+                  {form.showHeroSubtitle !== false && form.heroSubtitle?.trim() ? (
+                    <p className="text-xs text-slate-300 max-w-xl leading-relaxed">
+                      {form.heroSubtitle}
+                    </p>
+                  ) : (
+                    <p className="text-xs text-slate-500 italic">[Subtitle is currently deleted / hidden]</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
