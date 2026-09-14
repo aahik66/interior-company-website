@@ -227,7 +227,7 @@ export default function SettingsTab() {
             <input
               type="text"
               required
-              placeholder="House #42, Road #11, Block D, Banani, Dhaka-1213, Bangladesh"
+              placeholder="House -204, Port Road, Block-A, Bashundhara Riverview, Hashnabad, Keraniganj, Dhaka-1310"
               value={form.address}
               onChange={(e) => setForm({ ...form, address: e.target.value })}
               className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none"
