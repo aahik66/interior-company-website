@@ -92,9 +92,11 @@ export default function AdminLogin() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
         {/* Brand Header */}
         <div className="text-center">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-brand-500 mb-4 shadow-inner">
-            <HiOutlineShieldCheck className="h-8 w-8" />
-          </div>
+          <img
+            src="/assets/logo.png"
+            alt="Dimension Composition Logo"
+            className="h-16 w-16 mx-auto rounded-2xl object-contain bg-white p-1.5 shadow-xl shadow-brand-500/10 mb-4"
+          />
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             Dimension Composition
           </h2>
