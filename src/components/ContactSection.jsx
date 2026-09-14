@@ -1,38 +1,54 @@
 import { useState } from "react";
-import { HiOutlinePhone, HiOutlineMail, HiOutlineArrowRight } from "react-icons/hi";
+import { HiOutlinePhone, HiOutlineMail, HiOutlineArrowRight, HiOutlineLocationMarker } from "react-icons/hi";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { API_BASE } from "../config/api";
 import { useAuth } from "../context/AuthContext";
-
-const contactInfo = [
-  {
-    icon: FaWhatsapp,
-    label: "WhatsApp",
-    value: "+880 1700-000000",
-    href: "https://wa.me/8801700000000?text=Hello%20Dimension%20Composition!%20I%20am%20interested%20in%20your%20interior%20design%20services",
-  },
-  {
-    icon: HiOutlinePhone,
-    label: "Phone",
-    value: "+880 1700-000000",
-    href: "tel:+8801700000000",
-  },
-  {
-    icon: HiOutlineMail,
-    label: "Email",
-    value: "contact.dimensioncomposition@gmail.com",
-    href: "mailto:contact.dimensioncomposition@gmail.com",
-  },
-  {
-    icon: FaInstagram,
-    label: "Instagram",
-    value: "@dimension_composition",
-    href: "https://www.instagram.com",
-  },
-];
+import { useSettings } from "../context/SettingsContext";
 
 export default function ContactSection() {
+  const { settings } = useSettings();
   const { isAuthenticated, authFetch } = useAuth();
+
+  const mainPhone = settings?.phoneNumber || "+880 1739-835017";
+  const secondaryPhone = settings?.secondaryPhoneNumber || "+880 1601-370090";
+  const whatsappNum = settings?.whatsappNumber || "8801739835017";
+  const emailAddr = settings?.email || "contact@dimensioncomposition.com";
+  const officeAddress =
+    settings?.address ||
+    "House -204, Port Road, Block-A, Bashundhara Riverview, Hashnabad, Keraniganj, Dhaka-1310";
+
+  const contactInfo = [
+    {
+      icon: FaWhatsapp,
+      label: "Official WhatsApp",
+      value: mainPhone,
+      href: `https://wa.me/${whatsappNum}?text=Hello%20Dimension%20Composition!%20I%20am%20interested%20in%20your%20interior%20design%20services`,
+    },
+    {
+      icon: HiOutlinePhone,
+      label: "Main Hotline",
+      value: mainPhone,
+      href: `tel:${mainPhone.replace(/\s+/g, "")}`,
+    },
+    {
+      icon: HiOutlinePhone,
+      label: "Secondary Phone",
+      value: secondaryPhone,
+      href: `tel:${secondaryPhone.replace(/\s+/g, "")}`,
+    },
+    {
+      icon: HiOutlineLocationMarker,
+      label: "Studio Office Address",
+      value: officeAddress,
+      href: `https://maps.google.com/?q=${encodeURIComponent(officeAddress)}`,
+    },
+    {
+      icon: HiOutlineMail,
+      label: "Studio Email",
+      value: emailAddr,
+      href: `mailto:${emailAddr}`,
+    },
+  ];
   const [formData, setFormData] = useState({
     name: "",
     email: "",
