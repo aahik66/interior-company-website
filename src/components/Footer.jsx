@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from "react-icons/hi";
 import { useSettings } from "../context/SettingsContext";
+import Logo from "./Logo";
 
 const footerLinks = [
   { label: "Home", href: "/" },
@@ -30,11 +31,7 @@ export default function Footer() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 px-4 sm:px-6 lg:px-8 py-10 sm:py-14 sm:flex-row sm:items-start sm:justify-between">
         <div className="max-w-sm space-y-3">
           <div className="flex items-center gap-3">
-            <img
-              src="/assets/logo.png"
-              alt="Dimension Composition"
-              className="h-11 w-11 rounded-full object-contain bg-white p-0.5 shadow-md"
-            />
+            <Logo className="h-11 w-11" rounded="rounded-full" />
             <div>
               <p className="text-xs uppercase tracking-[0.22em] text-brand-400 font-bold leading-tight">Dimension</p>
               <p className="text-sm font-bold tracking-wider text-white leading-tight">Composition</p>

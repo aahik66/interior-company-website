@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiOutlineMenuAlt3, HiX, HiChevronDown } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
+import Logo from "./Logo";
 
 const aboutDropdownItems = [
   { label: "Overview", href: "/about#overview" },
@@ -85,11 +86,7 @@ export default function Navbar() {
             className="flex items-center gap-3 text-gray-900 group"
             onClick={() => setMenuOpen(false)}
           >
-            <img
-              src="/assets/logo.png"
-              alt="Dimension Composition logo"
-              className="h-11 w-11 rounded-full object-contain bg-white shadow-sm border border-gray-100 p-0.5"
-            />
+            <Logo className="h-11 w-11" rounded="rounded-full" />
             <div className="leading-tight">
               <p className="text-[13px] sm:text-base font-bold uppercase tracking-[0.16em] text-black">
                 Dimension
