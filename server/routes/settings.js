@@ -22,6 +22,11 @@ const DEFAULT_SETTINGS = {
   heroTitle: "Leading Interior Design Company in Bangladesh",
   heroSubtitle:
     "Award-winning interior architecture and turnkey design studio in Bangladesh. 15+ years experience, 700+ successful projects. Get expert design consultation for your dream home & corporate office.",
+  heroBadge: "Welcome to Dimension Composition",
+  heroHighlightText: "Bangladesh",
+  showHeroTitle: true,
+  showHeroSubtitle: true,
+  showHeroBadge: true,
 };
 
 // Get settings (Public)
@@ -62,6 +67,11 @@ router.put("/", adminRequired, async (req, res) => {
       "heroPosterUrl",
       "heroTitle",
       "heroSubtitle",
+      "heroBadge",
+      "heroHighlightText",
+      "showHeroTitle",
+      "showHeroSubtitle",
+      "showHeroBadge",
     ];
 
     fields.forEach((field) => {

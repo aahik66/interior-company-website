@@ -35,6 +35,26 @@ const settingSchema = new mongoose.Schema(
       default:
         "Award-winning interior architecture and turnkey design studio in Bangladesh. 15+ years experience, 700+ successful projects. Get expert design consultation for your dream home & corporate office.",
     },
+    heroBadge: {
+      type: String,
+      default: "Welcome to Dimension Composition",
+    },
+    heroHighlightText: {
+      type: String,
+      default: "Bangladesh",
+    },
+    showHeroTitle: {
+      type: Boolean,
+      default: true,
+    },
+    showHeroSubtitle: {
+      type: Boolean,
+      default: true,
+    },
+    showHeroBadge: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
