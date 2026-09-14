@@ -23,6 +23,7 @@ import quoteRoutes from "./routes/quotes.js";
 import videoRoutes from "./routes/videos.js";
 import settingRoutes from "./routes/settings.js";
 import uploadRoutes from "./routes/upload.js";
+import teamRoutes from "./routes/team.js";
 import { seedProjects } from "./utils/seedProjects.js";
 
 const app = express();
@@ -73,6 +74,7 @@ app.use("/api/quotes", quoteRoutes);
 app.use("/api/videos", videoRoutes);
 app.use("/api/settings", settingRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/team", teamRoutes);
 
 // Hostinger & Production Single-Port Serving
 // Serves built React static assets from ../dist when deployed
