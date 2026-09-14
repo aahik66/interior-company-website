@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
+import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from "react-icons/hi";
+import { useSettings } from "../context/SettingsContext";
 
 const footerLinks = [
   { label: "Home", href: "/" },
@@ -14,6 +15,16 @@ const footerLinks = [
 ];
 
 export default function Footer() {
+  const { settings } = useSettings();
+
+  const phoneMain = settings?.phoneNumber || "+880 1739-835017";
+  const phoneSecondary = settings?.secondaryPhoneNumber || "+880 1601-370090";
+  const whatsappNum = settings?.whatsappNumber || "8801739835017";
+  const emailAddr = settings?.email || "contact@dimensioncomposition.com";
+  const addressText =
+    settings?.address ||
+    "House -204, Port Road, Block-A, Bashundhara Riverview, Hashnabad, Keraniganj, Dhaka-1310";
+
   return (
     <footer className="bg-gray-900 text-white border-t border-gray-800">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-10 px-4 sm:px-6 lg:px-8 py-10 sm:py-14 sm:flex-row sm:items-start sm:justify-between">
@@ -32,9 +43,9 @@ export default function Footer() {
           <p className="text-base sm:text-lg font-semibold text-white">Modern interiors that feel calm, intentional, and beautifully lived in.</p>
           <div className="flex items-center gap-3 pt-1">
             {[
-              { Icon: FaInstagram, href: "https://www.instagram.com", label: "Instagram" },
-              { Icon: FaWhatsapp, href: "https://wa.me/8801700000000", label: "WhatsApp" },
-              { Icon: HiOutlineMail, href: "mailto:contact.dimensioncomposition@gmail.com", label: "Email" },
+              { Icon: FaInstagram, href: settings?.instagramUrl || "https://www.instagram.com", label: "Instagram" },
+              { Icon: FaWhatsapp, href: `https://wa.me/${whatsappNum}`, label: "WhatsApp" },
+              { Icon: HiOutlineMail, href: `mailto:${emailAddr}`, label: "Email" },
             ].map(({ Icon, href, label }) => (
               <a
                 key={label}
@@ -50,7 +61,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 sm:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Navigate</p>
             <div className="mt-3 sm:mt-4 flex flex-col gap-2 text-xs sm:text-sm text-gray-300">
@@ -66,11 +77,22 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Contact</p>
-            <div className="mt-3 sm:mt-4 space-y-2 text-xs sm:text-sm text-gray-300">
-              <p className="break-all">contact.dimensioncomposition@gmail.com</p>
-              <p>+880 1700-000000</p>
-              <p className="text-xs text-gray-400">Gulshan-2 / Banani, Dhaka</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-400">Studio & Contact</p>
+            <div className="mt-3 sm:mt-4 space-y-2.5 text-xs sm:text-sm text-gray-300">
+              <a href={`mailto:${emailAddr}`} className="block break-all hover:text-brand-400 transition">
+                {emailAddr}
+              </a>
+              <div className="flex flex-col gap-1 text-xs sm:text-sm">
+                <a href={`tel:${phoneMain.replace(/\s+/g, "")}`} className="hover:text-brand-400 transition font-medium">
+                  {phoneMain} <span className="text-[11px] text-brand-400">(Main)</span>
+                </a>
+                <a href={`tel:${phoneSecondary.replace(/\s+/g, "")}`} className="hover:text-brand-400 transition font-medium">
+                  {phoneSecondary} <span className="text-[11px] text-gray-400">(Hotline)</span>
+                </a>
+              </div>
+              <p className="text-xs text-gray-400 leading-relaxed max-w-xs">
+                {addressText}
+              </p>
             </div>
           </div>
         </div>
