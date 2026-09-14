@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { API_BASE } from "../../config/api";
 import { HiOutlineShieldCheck, HiOutlineLockClosed, HiOutlineMail, HiOutlineUser, HiOutlineArrowRight } from "react-icons/hi";
+import Logo from "../../components/Logo";
 
 export default function AdminLogin() {
   const { login, setupAdmin, isAuthenticated, isAdmin } = useAuth();
@@ -92,11 +93,7 @@ export default function AdminLogin() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
         {/* Brand Header */}
         <div className="text-center">
-          <img
-            src="/assets/logo.png"
-            alt="Dimension Composition Logo"
-            className="h-16 w-16 mx-auto rounded-2xl object-contain bg-white p-1.5 shadow-xl shadow-brand-500/10 mb-4"
-          />
+          <Logo className="h-16 w-16 mx-auto mb-4" rounded="rounded-2xl" imgClassName="p-1.5" />
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             Dimension Composition
           </h2>
