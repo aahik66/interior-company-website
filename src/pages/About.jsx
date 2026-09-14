@@ -176,7 +176,7 @@ export default function About() {
             </div>
 
             <a
-              href="https://wa.me/8801700000000?text=Hello%20Dimension%20Composition!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+              href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 text-sm font-semibold shadow transition hover:scale-105 self-start md:self-auto"
@@ -353,7 +353,7 @@ export default function About() {
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
                     <span className="font-medium text-slate-600">Dimension Composition</span>
                     <a
-                      href={`https://wa.me/8801700000000?text=Hello%20${encodeURIComponent(member.name)},%20I%20would%20like%20to%20consult%20regarding%20my%20interior%20project.`}
+                      href={`https://wa.me/8801739835017?text=Hello%20${encodeURIComponent(member.name)},%20I%20would%20like%20to%20consult%20regarding%20my%20interior%20project.`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-brand-500 font-semibold hover:underline flex items-center gap-1"
@@ -449,7 +449,7 @@ export default function About() {
               const applyMsg = encodeURIComponent(
                 `Hello Dimension Composition HR! I am applying for the "${job.title}" role.`
               );
-              const whatsappApply = `https://wa.me/8801700000000?text=${applyMsg}`;
+              const whatsappApply = `https://wa.me/8801739835017?text=${applyMsg}`;
 
               return (
                 <div
