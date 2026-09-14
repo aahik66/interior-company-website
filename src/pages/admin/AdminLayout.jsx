@@ -7,6 +7,7 @@ import QuotesTab from "./tabs/QuotesTab";
 import ContactsTab from "./tabs/ContactsTab";
 import ReviewsTab from "./tabs/ReviewsTab";
 import VideosTab from "./tabs/VideosTab";
+import TeamTab from "./tabs/TeamTab";
 import SettingsTab from "./tabs/SettingsTab";
 
 import {
@@ -16,6 +17,7 @@ import {
   HiOutlineMail,
   HiOutlineStar,
   HiOutlineVideoCamera,
+  HiOutlineUserGroup,
   HiOutlineCog,
   HiOutlineLogout,
   HiOutlineMenuAlt2,
@@ -43,6 +45,7 @@ export default function AdminLayout() {
     { id: "contacts", label: "Contact Inquiries", icon: HiOutlineMail },
     { id: "reviews", label: "Client Reviews", icon: HiOutlineStar },
     { id: "videos", label: "Video Testimonials", icon: HiOutlineVideoCamera },
+    { id: "team", label: "Team Members", icon: HiOutlineUserGroup },
     { id: "settings", label: "Website Settings", icon: HiOutlineCog },
   ];
 
@@ -212,6 +215,8 @@ export default function AdminLayout() {
           {activeTab === "reviews" && <ReviewsTab />}
 
           {activeTab === "videos" && <VideosTab />}
+
+          {activeTab === "team" && <TeamTab />}
 
           {activeTab === "settings" && <SettingsTab />}
         </main>
