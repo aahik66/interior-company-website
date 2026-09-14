@@ -433,7 +433,7 @@ export default function Projects() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-gray-50 text-gray-800">
+    <main className="w-full min-h-screen bg-transparent text-gray-800">
       {/* ========================================================
           1. PAGE HEADER (Matching BD Interior: Breadcrumb + Title)
           ======================================================== */}
