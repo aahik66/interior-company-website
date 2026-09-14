@@ -70,11 +70,7 @@ export default function AdminLayout() {
           {/* Brand Header */}
           <div className="p-6 border-b border-slate-800 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <img
-                src="/assets/logo.png"
-                alt="Dimension Composition"
-                className="h-11 w-11 rounded-xl object-contain bg-white p-0.5 shadow-md shadow-black/30"
-              />
+              <Logo className="h-11 w-11" rounded="rounded-xl" />
               <div>
                 <h1 className="font-extrabold text-sm text-white tracking-wide">
                   DIMENSION
