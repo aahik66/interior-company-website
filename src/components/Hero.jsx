@@ -18,6 +18,36 @@ export default function Hero() {
     "https://bdinterior.com/wp-content/uploads/2025/09/homepage-Video-3.mp4";
   const heroPosterUrl = settings?.heroPosterUrl || "/assets/hero.jpg";
 
+  const heroTitle = settings?.heroTitle !== undefined ? settings.heroTitle : "Leading Interior Design Company in Bangladesh";
+  const heroSubtitle =
+    settings?.heroSubtitle !== undefined
+      ? settings.heroSubtitle
+      : "Award-winning interior architecture and turnkey design studio in Bangladesh. 15+ years experience, 700+ successful projects. Get expert design consultation for your dream home & corporate office.";
+  const heroBadge = settings?.heroBadge !== undefined ? settings.heroBadge : "Welcome to Dimension Composition";
+  const showHeroTitle = settings?.showHeroTitle !== false && Boolean(heroTitle?.trim());
+  const showHeroSubtitle = settings?.showHeroSubtitle !== false && Boolean(heroSubtitle?.trim());
+  const showHeroBadge = settings?.showHeroBadge !== false && Boolean(heroBadge?.trim());
+  const highlightWord = settings?.heroHighlightText?.trim();
+
+  const renderTitle = () => {
+    if (!heroTitle) return null;
+    if (highlightWord && heroTitle.toLowerCase().includes(highlightWord.toLowerCase())) {
+      const escaped = highlightWord.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(`(${escaped})`, "gi");
+      const parts = heroTitle.split(regex);
+      return parts.map((part, i) =>
+        part.toLowerCase() === highlightWord.toLowerCase() ? (
+          <span key={i} className="text-brand-500">
+            {part}
+          </span>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      );
+    }
+    return heroTitle;
+  };
+
   return (
     <div className="relative w-full bg-slate-950 text-white overflow-hidden select-none">
       {/* 1. Minimalist Top Ticker */}
@@ -85,27 +115,29 @@ export default function Hero() {
         {/* Left-Corner Minimalist Content Container */}
         <div className="relative z-20 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24 my-auto">
           <div className="max-w-2xl text-left space-y-4 sm:space-y-5">
-            {/* Minimalist Pill Badge (No AI Spark Icon) */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-200 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-              <span>Welcome to Dimension Composition</span>
-            </div>
+            {/* Minimalist Pill Badge */}
+            {showHeroBadge && (
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3.5 py-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-200 backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+                <span>{heroBadge}</span>
+              </div>
+            )}
 
-            {/* Slightly Smaller, Clean H1 Heading */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold tracking-tight text-white leading-[1.2] drop-shadow-md">
-              Leading Interior Design <br className="hidden sm:inline" />
-              Company in{" "}
-              <span className="text-brand-500">
-                Bangladesh
-              </span>
-            </h1>
+            {/* Dynamic H1 Heading */}
+            {showHeroTitle && (
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-extrabold tracking-tight text-white leading-[1.2] drop-shadow-md">
+                {renderTitle()}
+              </h1>
+            )}
 
-            {/* Refined, Slightly Smaller Paragraph */}
-            <p className="text-xs sm:text-sm md:text-[15px] text-slate-300 leading-relaxed font-normal max-w-xl">
-              Award-winning interior architecture and turnkey design studio in Bangladesh. 15+ years experience, 700+ successful projects. Get expert design consultation for your dream home &amp; corporate office.
-            </p>
+            {/* Dynamic Subtitle Paragraph */}
+            {showHeroSubtitle && (
+              <p className="text-xs sm:text-sm md:text-[15px] text-slate-300 leading-relaxed font-normal max-w-xl">
+                {heroSubtitle}
+              </p>
+            )}
 
-            {/* Single Minimalist Action Button: Explore Portfolio */}
+            {/* Action Button: Explore Portfolio */}
             <div className="pt-1.5 sm:pt-2">
               <Link
                 to="/portfolio"
