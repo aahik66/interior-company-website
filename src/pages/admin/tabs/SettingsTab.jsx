@@ -159,7 +159,7 @@ export default function SettingsTab() {
               <input
                 type="text"
                 required
-                placeholder="8801700000000"
+                placeholder="8801739835017"
                 value={form.whatsappNumber}
                 onChange={(e) => setForm({ ...form, whatsappNumber: e.target.value.replace(/\D/g, "") })}
                 className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none font-mono"
