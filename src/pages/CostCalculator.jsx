@@ -286,7 +286,7 @@ Estimated Per Sq.Ft: ৳ ${calculationResults.perSqftRate.toLocaleString()} / sf
 
 I would like to discuss this estimate with a Senior Architect.`;
 
-    const url = `https://wa.me/8801700000000?text=${encodeURIComponent(summaryText)}`;
+    const url = `https://wa.me/8801739835017?text=${encodeURIComponent(summaryText)}`;
     window.open(url, "_blank");
   };
 
@@ -347,7 +347,7 @@ I would like to discuss this estimate with a Senior Architect.`;
             </div>
 
             <a
-              href="https://wa.me/8801700000000?text=Hello%20Dimension%20Composition!%20I%20would%20like%20a%20free%20cost%20estimation%20consultation."
+              href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20would%20like%20a%20free%20cost%20estimation%20consultation."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 text-sm font-semibold shadow transition hover:scale-105 self-start md:self-auto"

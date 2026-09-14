@@ -467,7 +467,7 @@ export default function Projects() {
 
             {/* Direct WhatsApp Consultation */}
             <a
-              href="https://wa.me/8801700000000?text=Hello%20Dimension%20Composition!%20I%20am%20exploring%20your%20portfolio%20and%20would%20like%20a%20consultation."
+              href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20am%20exploring%20your%20portfolio%20and%20would%20like%20a%20consultation."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 text-sm font-bold shadow-lg shadow-green-900/30 transition hover:scale-105 self-start md:self-auto"
@@ -738,7 +738,7 @@ export default function Projects() {
                 Cost Calculator →
               </Link>
               <a
-                href="https://wa.me/8801700000000?text=Hello%20Dimension%20Composition!%20I%20would%20like%20a%20free%20design%20consultation%20and%20cost%20estimate."
+                href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20would%20like%20a%20free%20design%20consultation%20and%20cost%20estimate."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-6 py-3.5 text-sm font-bold shadow-xl transition hover:scale-105"
