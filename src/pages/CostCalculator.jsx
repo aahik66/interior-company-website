@@ -313,7 +313,7 @@ I would like to discuss this estimate with a Senior Architect.`;
   };
 
   return (
-    <main className="w-full min-h-screen bg-slate-50 text-slate-800">
+    <main className="w-full min-h-screen bg-transparent text-slate-800">
       {/* 1. Header Banner */}
       <section className="relative isolate overflow-hidden bg-slate-900 pt-28 pb-12 sm:pt-32 sm:pb-16 text-white">
         <img
