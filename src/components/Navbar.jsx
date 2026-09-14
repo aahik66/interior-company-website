@@ -38,8 +38,8 @@ export default function Navbar() {
 
   const navStyles =
     scrolled || menuOpen
-      ? "bg-white/95 shadow-lg backdrop-blur-xl border-b border-gray-100"
-      : "bg-white border-b border-gray-100";
+      ? "header-texture-bar shadow-[0_10px_35px_-8px_rgba(0,0,0,0.1)]"
+      : "header-texture-bar shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)]";
 
   // Handles anchor scrolls and route navigation
   const handleAnchor = (href) => {
@@ -78,7 +78,7 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navStyles}`}>
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
           <Link
@@ -249,8 +249,8 @@ export default function Navbar() {
 
       {/* Mobile Menu Drawer */}
       {menuOpen && (
-        <div className="lg:hidden w-full bg-white/98 backdrop-blur-xl shadow-xl border-t border-gray-100 max-h-[calc(100vh-4rem)] overflow-y-auto overscroll-contain">
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pb-8 pt-3 flex flex-col gap-1.5">
+        <div className="lg:hidden w-full header-texture-bar shadow-2xl border-t border-slate-200/80 max-h-[calc(100vh-4rem)] overflow-y-auto overscroll-contain relative z-10">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 pb-8 pt-3 flex flex-col gap-1.5 relative z-10">
             <Link
               to="/"
               onClick={() => handleAnchor("/")}
