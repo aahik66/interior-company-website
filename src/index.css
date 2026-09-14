@@ -170,3 +170,65 @@ a {
 .bd-item-card:hover {
   transform: translateY(-5px);
 }
+
+/* ========================================================
+   SIGNATURE LUXURY LIGHT SWEEP (SHINE) EFFECT FOR LOGOS
+   ======================================================== */
+.logo-shine-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.logo-shine-wrapper::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -160%;
+  width: 70%;
+  height: 220%;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.45) 45%,
+    rgba(255, 246, 215, 0.85) 50%,
+    rgba(255, 255, 255, 0.45) 55%,
+    rgba(255, 255, 255, 0) 80%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  z-index: 20;
+  animation: logoShineSweep 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Immediate glowing sweep on mouse hover */
+.logo-shine-wrapper:hover::after,
+.group:hover .logo-shine-wrapper::after {
+  animation: logoShineHover 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes logoShineSweep {
+  0% {
+    left: -160%;
+  }
+  24% {
+    left: 180%;
+  }
+  100% {
+    left: 180%;
+  }
+}
+
+@keyframes logoShineHover {
+  0% {
+    left: -160%;
+  }
+  100% {
+    left: 180%;
+  }
+}
