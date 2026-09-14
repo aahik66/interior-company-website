@@ -8,6 +8,10 @@ import {
   HiOutlineLocationMarker,
   HiOutlineGlobeAlt,
   HiOutlineCheck,
+  HiOutlineTrash,
+  HiOutlineRefresh,
+  HiOutlineEye,
+  HiOutlineEyeOff,
 } from "react-icons/hi";
 import { FaWhatsapp, FaFacebook, FaInstagram, FaYoutube, FaLinkedin } from "react-icons/fa";
 import MediaUploader from "../../../components/admin/MediaUploader";
@@ -34,6 +38,11 @@ export default function SettingsTab() {
     heroTitle: "Leading Interior Design Company in Bangladesh",
     heroSubtitle:
       "Award-winning interior architecture and turnkey design studio in Bangladesh. 15+ years experience, 700+ successful projects. Get expert design consultation for your dream home & corporate office.",
+    heroBadge: "Welcome to Dimension Composition",
+    heroHighlightText: "Bangladesh",
+    showHeroTitle: true,
+    showHeroSubtitle: true,
+    showHeroBadge: true,
   });
 
   const [loading, setLoading] = useState(true);
