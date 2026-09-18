@@ -29,7 +29,7 @@ export default function Reviews() {
   const loadReviews = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${API_BASE}/reviews`);
+      const res = await fetch(`${API_BASE}/reviews?t=${Date.now()}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Unable to load reviews");
       setReviews(data);

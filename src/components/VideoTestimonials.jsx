@@ -114,8 +114,8 @@ export default function VideoTestimonials() {
 
   // Load video testimonials from API if available
   useEffect(() => {
-    fetch(`${API_BASE}/videos`)
-      .then((res) => (res.ok ? res.json() : []))
+    fetch(`${API_BASE}/videos?t=${Date.now()}`)
+      .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
           setItems(data);

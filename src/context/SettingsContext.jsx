@@ -29,7 +29,7 @@ export function SettingsProvider({ children }) {
 
   const fetchSettings = async () => {
     try {
-      const res = await fetch(`${API_BASE}/settings`);
+      const res = await fetch(`${API_BASE}/settings?t=${Date.now()}`);
       if (res.ok) {
         const data = await res.json();
         setSettings((prev) => ({ ...prev, ...data }));

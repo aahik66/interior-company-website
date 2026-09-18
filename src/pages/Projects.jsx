@@ -373,7 +373,7 @@ export default function Projects() {
 
   // Load database projects to merge
   useEffect(() => {
-    fetch(`${API_BASE}/projects`)
+    fetch(`${API_BASE}/projects?t=${Date.now()}`)
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) setDbProjects(data);
