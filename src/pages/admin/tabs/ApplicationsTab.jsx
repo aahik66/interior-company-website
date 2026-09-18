@@ -33,12 +33,12 @@ export default function ApplicationsTab() {
       if (search) queryParams.append("search", search);
       if (statusFilter !== "all") queryParams.append("status", statusFilter);
 
-      const res = await authFetch(`${API_BASE}/careers/applications?${queryParams.toString()}`);
-      if (!res.ok) throw new Error("Failed to load job applications");
-      const data = await res.json();
-      setApplications(data);
+      const data = await authFetch(`${API_BASE}/careers/applications?${queryParams.toString()}`);
+      if (Array.isArray(data)) {
+        setApplications(data);
+      }
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Failed to load job applications");
     } finally {
       setLoading(false);
     }
@@ -51,11 +51,10 @@ export default function ApplicationsTab() {
   const handleStatusChange = async (id, newStatus) => {
     try {
       setUpdatingId(id);
-      const res = await authFetch(`${API_BASE}/careers/applications/${id}/status`, {
+      await authFetch(`${API_BASE}/careers/applications/${id}/status`, {
         method: "PATCH",
         body: JSON.stringify({ status: newStatus }),
       });
-      if (!res.ok) throw new Error("Failed to update status");
       
       setApplications((prev) =>
         prev.map((app) => (app._id === id ? { ...app, status: newStatus } : app))
@@ -64,7 +63,7 @@ export default function ApplicationsTab() {
         setSelectedApp((prev) => ({ ...prev, status: newStatus }));
       }
     } catch (err) {
-      alert(err.message);
+      alert(err.message || "Failed to update status");
     } finally {
       setUpdatingId(null);
     }
@@ -73,17 +72,16 @@ export default function ApplicationsTab() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job application?")) return;
     try {
-      const res = await authFetch(`${API_BASE}/careers/applications/${id}`, {
+      await authFetch(`${API_BASE}/careers/applications/${id}`, {
         method: "DELETE",
       });
-      if (!res.ok) throw new Error("Failed to delete application");
 
       setApplications((prev) => prev.filter((app) => app._id !== id));
       if (selectedApp && selectedApp._id === id) {
         setSelectedApp(null);
       }
     } catch (err) {
-      alert(err.message);
+      alert(err.message || "Failed to delete application");
     }
   };
 
