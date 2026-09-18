@@ -54,6 +54,7 @@ export default function Reviews() {
       await authFetch(`${API_BASE}/reviews`, {
         method: "POST",
         body: JSON.stringify({
+          name: user?.name || "Verified Client",
           rating: Number(form.rating),
           comment: form.comment,
         }),

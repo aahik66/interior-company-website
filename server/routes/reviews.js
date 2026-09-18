@@ -1,6 +1,7 @@
 import express from "express";
 import Review from "../models/Review.js";
 import { adminRequired } from "../middleware/admin.js";
+import { authRequired } from "../middleware/auth.js";
 
 const router = express.Router();
 
@@ -26,21 +27,22 @@ router.get("/all", adminRequired, async (_req, res) => {
   }
 });
 
-// Submit review (Public or Authenticated)
-router.post("/", async (req, res) => {
+// Submit review (Authenticated required)
+router.post("/", authRequired, async (req, res) => {
   try {
-    const { name, rating, comment, designation, project } = req.body;
-    if (!name || !rating || !comment) {
+    const { rating, comment, designation, project } = req.body;
+    const authorName = req.body.name || req.user?.name || "Verified Client";
+    if (!authorName || !rating || !comment) {
       return res.status(400).json({ message: "Name, rating, and comment are required." });
     }
     const cappedRating = Math.max(1, Math.min(5, Number(rating)));
     const review = await Review.create({
-      name,
+      name: authorName,
       rating: cappedRating,
       comment,
-      designation: designation || "Verified Client",
+      designation: designation || (req.user?.role === "admin" ? "Admin" : "Verified Client"),
       project: project || "Interior Design",
-      status: "approved", // default approved or pending
+      status: "approved",
     });
     res.status(201).json(review);
   } catch (err) {
