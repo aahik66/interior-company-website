@@ -55,16 +55,18 @@ const upload = multer({
   fileFilter,
 });
 
+import { uploadFileToHostinger } from "../utils/hostingerUpload.js";
+
 // Upload Single File (Image or Video)
-router.post("/single", adminRequired, upload.single("file"), (req, res) => {
+router.post("/single", adminRequired, upload.single("file"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No file was uploaded." });
     }
 
-    const fileUrl = `/uploads/${req.file.filename}`;
+    const fileUrl = await uploadFileToHostinger(req.file.path, req.file.filename);
     res.json({
-      message: "File uploaded successfully",
+      message: "File uploaded successfully to Hostinger storage",
       url: fileUrl,
       filename: req.file.filename,
       size: req.file.size,
@@ -76,21 +78,22 @@ router.post("/single", adminRequired, upload.single("file"), (req, res) => {
 });
 
 // Upload Multiple Files (e.g. Project Gallery)
-router.post("/multiple", adminRequired, upload.array("files", 12), (req, res) => {
+router.post("/multiple", adminRequired, upload.array("files", 12), async (req, res) => {
   try {
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "No files were uploaded." });
     }
 
-    const fileUrls = req.files.map((f) => `/uploads/${f.filename}`);
+    const fileResults = [];
+    for (const file of req.files) {
+      const url = await uploadFileToHostinger(file.path, file.filename);
+      fileResults.push({ url, filename: file.filename, size: file.size });
+    }
+
     res.json({
-      message: `${req.files.length} files uploaded successfully`,
-      urls: fileUrls,
-      files: req.files.map((f) => ({
-        url: `/uploads/${f.filename}`,
-        filename: f.filename,
-        size: f.size,
-      })),
+      message: `${req.files.length} files uploaded successfully to Hostinger storage`,
+      urls: fileResults.map((f) => f.url),
+      files: fileResults,
     });
   } catch (err) {
     res.status(500).json({ message: "Multiple file upload failed", error: err.message });
