@@ -96,9 +96,19 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center sm:items-start gap-2 px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between text-center sm:text-left">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 sm:px-6 lg:px-8 py-4 text-xs text-gray-400 sm:flex-row sm:items-center sm:justify-between text-center sm:text-left">
           <p>© {new Date().getFullYear()} Dimension Composition. All rights reserved.</p>
-          <p className="text-gray-500">Dhaka, Bangladesh</p>
+          <p className="text-gray-400">
+            Designed & Developed by{" "}
+            <a
+              href="https://www.facebook.com/ashik5795"
+              target="_blank"
+              rel="noreferrer"
+              className="text-brand-400 font-semibold hover:underline transition"
+            >
+              Ashikur Rahman
+            </a>
+          </p>
         </div>
       </div>
     </footer>
