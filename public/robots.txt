@@ -1,0 +1,14 @@
+# Robots.txt for Dimension Composition
+User-agent: *
+Allow: /
+Allow: /portfolio
+Allow: /cost-calculator
+Allow: /about
+Allow: /contact
+Allow: /uploads/
+
+Disallow: /admin
+Disallow: /api/
+Disallow: /server/
+
+Sitemap: https://dimensioncomposition.com/sitemap.xml
