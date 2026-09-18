@@ -43,7 +43,12 @@ export function AuthProvider({ children }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
       });
-      const data = await res.json();
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (e) {
+        throw new Error("কানেকশন আপডেট হয়েছে। দয়া করে পেজটি Hard Refresh (Ctrl + F5) দিন।");
+      }
       if (!res.ok) throw new Error(data.message || "Unable to login");
       setUser(data.user);
       setToken(data.token);
@@ -81,7 +86,12 @@ export function AuthProvider({ children }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(details),
       });
-      const data = await res.json();
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (e) {
+        throw new Error("কানেকশন আপডেট হয়েছে। দয়া করে পেজটি Hard Refresh (Ctrl + F5) দিন।");
+      }
       if (!res.ok) throw new Error(data.message || "Unable to setup admin account");
       setUser(data.user);
       setToken(data.token);

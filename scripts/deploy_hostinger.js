@@ -56,18 +56,21 @@ async function deploy() {
         await client.ensureDir("/" + remoteDir);
       }
 
-      // Check if file already exists with identical size
-      let needsUpload = true;
-      try {
-        const remoteSize = await client.size(fileName);
-        if (remoteSize === localSize) {
-          needsUpload = false;
-          skippedCount++;
-          console.log(`[${i + 1}/${allFiles.length}] Already up to date: ${relativePath}`);
+      // Code files (html, js, css, htaccess) must always be uploaded to guarantee index.html & JS bundles sync
+      const isCodeFile = /\.(html|js|css|htaccess|json)$/i.test(fileName);
+      let needsUpload = isCodeFile;
+
+      if (!isCodeFile) {
+        try {
+          const remoteSize = await client.size(fileName);
+          if (remoteSize === localSize) {
+            needsUpload = false;
+            skippedCount++;
+            console.log(`[${i + 1}/${allFiles.length}] Already up to date: ${relativePath}`);
+          }
+        } catch (e) {
+          needsUpload = true;
         }
-      } catch (e) {
-        // File doesn't exist remotely, proceed to upload
-        needsUpload = true;
       }
 
       if (needsUpload) {
