@@ -98,6 +98,7 @@ export default function Hero() {
             muted
             loop
             playsInline
+            preload="none"
             onLoadedData={() => setIsVideoLoaded(true)}
             poster={heroPosterUrl}
             className="h-full w-full object-cover scale-105 transition duration-1000"
