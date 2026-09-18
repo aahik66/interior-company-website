@@ -30,13 +30,23 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: process.env.EMAIL_SERVICE || "gmail",
-      auth: {
-        user: EMAIL_USER,
-        pass: EMAIL_PASS,
-      },
-    });
+    const transporter = process.env.EMAIL_HOST
+      ? nodemailer.createTransport({
+          host: process.env.EMAIL_HOST,
+          port: Number(process.env.EMAIL_PORT) || 465,
+          secure: (Number(process.env.EMAIL_PORT) || 465) === 465,
+          auth: {
+            user: EMAIL_USER,
+            pass: EMAIL_PASS,
+          },
+        })
+      : nodemailer.createTransport({
+          service: process.env.EMAIL_SERVICE || "gmail",
+          auth: {
+            user: EMAIL_USER,
+            pass: EMAIL_PASS,
+          },
+        });
 
     const targetRecipient = NOTIFICATION_EMAIL || EMAIL_USER;
 
