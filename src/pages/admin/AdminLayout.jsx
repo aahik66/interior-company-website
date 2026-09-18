@@ -9,6 +9,7 @@ import ReviewsTab from "./tabs/ReviewsTab";
 import VideosTab from "./tabs/VideosTab";
 import TeamTab from "./tabs/TeamTab";
 import SettingsTab from "./tabs/SettingsTab";
+import ApplicationsTab from "./tabs/ApplicationsTab";
 import Logo from "../../components/Logo";
 
 import {
@@ -20,6 +21,7 @@ import {
   HiOutlineVideoCamera,
   HiOutlineUserGroup,
   HiOutlineCog,
+  HiOutlineBriefcase,
   HiOutlineLogout,
   HiOutlineMenuAlt2,
   HiOutlineX,
@@ -44,6 +46,7 @@ export default function AdminLayout() {
     { id: "projects", label: "Projects & Portfolio", icon: HiOutlineFolder },
     { id: "quotes", label: "Cost Calculator Leads", icon: HiOutlineCalculator },
     { id: "contacts", label: "Contact Inquiries", icon: HiOutlineMail },
+    { id: "applications", label: "Job Applications", icon: HiOutlineBriefcase },
     { id: "reviews", label: "Client Reviews", icon: HiOutlineStar },
     { id: "videos", label: "Video Testimonials", icon: HiOutlineVideoCamera },
     { id: "team", label: "Team Members", icon: HiOutlineUserGroup },
@@ -208,6 +211,8 @@ export default function AdminLayout() {
           {activeTab === "quotes" && <QuotesTab />}
 
           {activeTab === "contacts" && <ContactsTab />}
+
+          {activeTab === "applications" && <ApplicationsTab />}
 
           {activeTab === "reviews" && <ReviewsTab />}
 

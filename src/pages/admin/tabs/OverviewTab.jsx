@@ -10,6 +10,7 @@ import {
   HiOutlinePlus,
   HiOutlineCog,
   HiOutlineArrowRight,
+  HiOutlineBriefcase,
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -21,6 +22,7 @@ export default function OverviewTab({ setActiveTab, onOpenNewProjectModal }) {
     contactsCount: 0,
     reviewsCount: 0,
     videosCount: 0,
+    applicationsCount: 0,
   });
   const [recentQuotes, setRecentQuotes] = useState([]);
   const [recentContacts, setRecentContacts] = useState([]);
@@ -30,12 +32,13 @@ export default function OverviewTab({ setActiveTab, onOpenNewProjectModal }) {
     async function loadOverview() {
       setLoading(true);
       try {
-        const [projRes, quotesRes, contactRes, revRes, vidRes] = await Promise.allSettled([
+        const [projRes, quotesRes, contactRes, revRes, vidRes, appRes] = await Promise.allSettled([
           fetch(`${API_BASE}/projects`),
           authFetch(`${API_BASE}/quotes`),
           authFetch(`${API_BASE}/contact`),
           fetch(`${API_BASE}/reviews`),
           fetch(`${API_BASE}/videos`),
+          authFetch(`${API_BASE}/careers/applications`),
         ]);
 
         const projects = projRes.status === "fulfilled" && projRes.value.ok ? await projRes.value.json() : [];
@@ -43,6 +46,7 @@ export default function OverviewTab({ setActiveTab, onOpenNewProjectModal }) {
         const contacts = contactRes.status === "fulfilled" && contactRes.value ? contactRes.value : [];
         const reviews = revRes.status === "fulfilled" && revRes.value.ok ? await revRes.value.json() : [];
         const videos = vidRes.status === "fulfilled" && vidRes.value.ok ? await vidRes.value.json() : [];
+        const apps = appRes.status === "fulfilled" && appRes.value ? appRes.value : [];
 
         setStats({
           projectsCount: Array.isArray(projects) ? projects.length : 0,
@@ -50,6 +54,7 @@ export default function OverviewTab({ setActiveTab, onOpenNewProjectModal }) {
           contactsCount: Array.isArray(contacts) ? contacts.length : 0,
           reviewsCount: Array.isArray(reviews) ? reviews.length : 0,
           videosCount: Array.isArray(videos) ? videos.length : 0,
+          applicationsCount: Array.isArray(apps) ? apps.length : 0,
         });
 
         setRecentQuotes(Array.isArray(quotes) ? quotes.slice(0, 5) : []);
@@ -85,6 +90,13 @@ export default function OverviewTab({ setActiveTab, onOpenNewProjectModal }) {
       icon: HiOutlineMail,
       color: "from-emerald-500 to-teal-600",
       tab: "contacts",
+    },
+    {
+      title: "Job Applications",
+      count: stats.applicationsCount || 0,
+      icon: HiOutlineBriefcase,
+      color: "from-blue-600 to-cyan-600",
+      tab: "applications",
     },
     {
       title: "Client Reviews",
