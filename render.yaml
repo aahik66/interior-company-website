@@ -7,6 +7,8 @@ services:
     buildCommand: npm install
     startCommand: node server/index.js
     envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
       - key: MONGO_URI
         value: mongodb+srv://kur9426_db_user:AtVOwEWXA1YhJrro@cluster0.nqndxh8.mongodb.net/dimension_composition?retryWrites=true&w=majority&appName=Cluster0
       - key: JWT_SECRET

@@ -6,9 +6,6 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { MongoMemoryServer } from "mongodb-memory-server";
-
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Load environment variables from .env
@@ -106,12 +103,14 @@ async function start() {
           "Primary MongoDB connection failed, falling back to temporary MongoDB server:",
           err.message
         );
+        const { MongoMemoryServer } = await import("mongodb-memory-server");
         mongoMemoryServer = await MongoMemoryServer.create();
         mongoUri = mongoMemoryServer.getUri();
         await mongoose.connect(mongoUri);
         console.log("Connected to temporary MongoDB");
       }
     } else {
+      const { MongoMemoryServer } = await import("mongodb-memory-server");
       mongoMemoryServer = await MongoMemoryServer.create();
       mongoUri = mongoMemoryServer.getUri();
       console.log("No MONGO_URI found, starting temporary MongoDB server");
