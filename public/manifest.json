@@ -1,0 +1,17 @@
+{
+  "short_name": "Dimension",
+  "name": "Dimension Composition - Best Interior Firm in Dhaka",
+  "description": "Premier luxury interior design and architectural planning firm in Dhaka, Bangladesh.",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "display": "standalone",
+  "orientation": "portrait"
+}

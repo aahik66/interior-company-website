@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
 import {
   HiOutlineChevronRight,
   HiOutlineShieldCheck,
@@ -162,8 +163,36 @@ export default function About() {
     }
   };
 
+  const aboutSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dimensioncomposition.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About Us",
+          "item": "https://dimensioncomposition.com/about"
+        }
+      ]
+    }
+  ];
+
   return (
     <main className="w-full min-h-screen bg-white text-slate-800">
+      <SEOHead
+        title="About Dimension Composition | Best Interior Design Firm in Dhaka"
+        description="Learn about Dimension Composition, our team of expert architects, quality policy, and luxury residential & commercial interior design execution standards in Dhaka, Bangladesh."
+        keywords="about dimension composition, interior design team dhaka, top architects bangladesh, interior design company history, luxury interior firm"
+        canonical="https://dimensioncomposition.com/about"
+        schema={aboutSchema}
+      />
       {/* ========================================================
           1. ABOUT HERO BANNER (Clean, Fresh, Architectural)
           ======================================================== */}

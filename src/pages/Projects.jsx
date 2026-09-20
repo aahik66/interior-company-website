@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
 import { API_BASE } from "../config/api";
 import ProjectModal from "../components/ProjectModal";
 import {
@@ -432,8 +433,36 @@ export default function Projects() {
     }
   };
 
+  const projectsSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dimensioncomposition.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Portfolio & Projects",
+          "item": "https://dimensioncomposition.com/portfolio"
+        }
+      ]
+    }
+  ];
+
   return (
     <main className="w-full min-h-screen bg-gray-50 text-gray-800">
+      <SEOHead
+        title="Interior Design Portfolio & Completed Projects in Dhaka | Dimension Composition"
+        description="Explore luxury residential duplex apartments, corporate office interiors, penthouses, and commercial projects completed by Dimension Composition in Dhaka, Bangladesh."
+        keywords="interior design portfolio dhaka, completed interior projects, residential interior gallery, office interior design dhaka, duplex interior bangladesh"
+        canonical="https://dimensioncomposition.com/portfolio"
+        schema={projectsSchema}
+      />
       {/* ========================================================
           1. PAGE HEADER (Matching BD Interior: Breadcrumb + Title)
           ======================================================== */}

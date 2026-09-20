@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
+import SEOHead from "../components/SEOHead";
 import { API_BASE } from "../config/api";
 import {
   HiOutlineChevronRight,
@@ -312,8 +313,66 @@ I would like to discuss this estimate with a Senior Architect.`;
     }).catch((err) => console.warn("Could not save quote lead:", err));
   };
 
+  const calcSchema = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://dimensioncomposition.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cost Calculator",
+          "item": "https://dimensioncomposition.com/cost-calculator"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does interior design cost per square foot in Dhaka?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Interior design cost in Dhaka ranges from BDT 800 - 1,500/sq.ft for Standard package, BDT 1,600 - 2,500/sq.ft for Premium, and BDT 2,600 - 4,500+/sq.ft for Luxury turnkey projects depending on materials like Gorjan plywood, HPL, acrylic, and quartz countertops."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a full apartment interior design project take in Dhaka?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Complete residential interior execution for a 1,200 to 2,000 sq.ft apartment typically takes 45 to 60 working days from 3D layout approval to handover."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is included in Dimension Composition's turnkey interior packages?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Turnkey interior package includes 2D floor layout planning, 3D architectural visualization, complete woodwork (master bedroom, living room, modular kitchen, dining unit), gypsum ceiling with LED lighting, electrical work, plumbing, and site cleanup."
+          }
+        }
+      ]
+    }
+  ];
+
   return (
     <main className="w-full min-h-screen bg-slate-50 text-slate-800">
+      <SEOHead
+        title="Interior Design Cost Calculator Dhaka | Instant Budget Estimator"
+        description="Calculate instant turnkey interior cost for your apartment, duplex, or office in Dhaka. Get itemized price estimates for master bedroom, modular kitchen, gypsum ceiling, & living room woodwork."
+        keywords="interior design cost calculator dhaka, interior price per sq ft bangladesh, apartment interior cost dhaka, duplex interior estimator, kitchen interior price"
+        canonical="https://dimensioncomposition.com/cost-calculator"
+        schema={calcSchema}
+      />
       {/* 1. Header Banner */}
       <section className="relative isolate overflow-hidden bg-slate-900 pt-28 pb-12 sm:pt-32 sm:pb-16 text-white">
         <img
