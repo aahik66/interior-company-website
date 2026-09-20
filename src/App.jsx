@@ -14,6 +14,8 @@ const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
 const About = lazy(() => import("./pages/About"));
 const CostCalculator = lazy(() => import("./pages/CostCalculator"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogSingle = lazy(() => import("./pages/BlogSingle"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 
@@ -96,6 +98,8 @@ function App() {
             <Route path="/cost-calculator" element={<CostCalculator />} />
             <Route path="/about" element={<About />} />
             <Route path="/about/:section" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogSingle />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>

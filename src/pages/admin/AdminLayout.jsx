@@ -10,6 +10,7 @@ import VideosTab from "./tabs/VideosTab";
 import TeamTab from "./tabs/TeamTab";
 import SettingsTab from "./tabs/SettingsTab";
 import ApplicationsTab from "./tabs/ApplicationsTab";
+import BlogsTab from "./tabs/BlogsTab";
 import Logo from "../../components/Logo";
 
 import {
@@ -27,6 +28,7 @@ import {
   HiOutlineX,
   HiOutlineExternalLink,
   HiOutlineShieldCheck,
+  HiOutlineDocumentText,
 } from "react-icons/hi";
 
 export default function AdminLayout() {
@@ -44,6 +46,7 @@ export default function AdminLayout() {
   const navItems = [
     { id: "overview", label: "Dashboard", icon: HiOutlineViewGrid },
     { id: "projects", label: "Projects & Portfolio", icon: HiOutlineFolder },
+    { id: "blogs", label: "Blog Posts & Guides", icon: HiOutlineDocumentText },
     { id: "quotes", label: "Cost Calculator Leads", icon: HiOutlineCalculator },
     { id: "contacts", label: "Contact Inquiries", icon: HiOutlineMail },
     { id: "applications", label: "Job Applications", icon: HiOutlineBriefcase },
@@ -207,6 +210,8 @@ export default function AdminLayout() {
               setIsAddModalOpen={setIsAddModalOpen}
             />
           )}
+
+          {activeTab === "blogs" && <BlogsTab />}
 
           {activeTab === "quotes" && <QuotesTab />}
 

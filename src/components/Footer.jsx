@@ -8,6 +8,7 @@ const footerLinks = [
   { label: "Home", href: "/" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Cost Calculator", href: "/cost-calculator" },
+  { label: "Blog & Guides", href: "/blog" },
   { label: "Overview", href: "/about#overview" },
   { label: "Our Team", href: "/about#team" },
   { label: "Quality Policy", href: "/about#quality-policy" },

@@ -22,7 +22,9 @@ import settingRoutes from "./routes/settings.js";
 import uploadRoutes from "./routes/upload.js";
 import teamRoutes from "./routes/team.js";
 import careerRoutes from "./routes/careers.js";
+import blogRoutes from "./routes/blogs.js";
 import { seedProjects } from "./utils/seedProjects.js";
+import { seedBlogs } from "./utils/seedBlogs.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -75,6 +77,7 @@ app.use("/api/settings", settingRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/careers", careerRoutes);
+app.use("/api/blogs", blogRoutes);
 
 // Hostinger & Production Single-Port Serving
 // Serves built React static assets from ../dist when deployed
@@ -122,6 +125,7 @@ async function start() {
     }
 
     await seedProjects();
+    await seedBlogs();
     app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
   } catch (err) {
     console.error("Server failed to start", err);

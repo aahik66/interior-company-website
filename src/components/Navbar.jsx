@@ -193,6 +193,18 @@ export default function Navbar() {
             </div>
 
             <Link
+              to="/blog"
+              onClick={() => handleAnchor("/blog")}
+              className={`text-sm font-semibold transition ${
+                location.pathname.startsWith("/blog")
+                  ? "text-brand-500 font-bold"
+                  : "text-gray-700 hover:text-brand-500"
+              }`}
+            >
+              Blog
+            </Link>
+
+            <Link
               to="/#contact"
               onClick={() => handleAnchor("/#contact")}
               className="text-sm font-semibold text-gray-700 hover:text-brand-500 transition"
@@ -335,6 +347,18 @@ export default function Navbar() {
               className="rounded-xl px-3.5 py-2.5 text-base font-semibold text-gray-800 transition hover:bg-gray-50 hover:text-brand-500"
             >
               Testimonials
+            </Link>
+
+            <Link
+              to="/blog"
+              onClick={() => handleAnchor("/blog")}
+              className={`rounded-xl px-3.5 py-2.5 text-base font-semibold transition ${
+                location.pathname.startsWith("/blog")
+                  ? "bg-brand-50 text-brand-600 font-bold"
+                  : "text-gray-800 hover:bg-gray-50 hover:text-brand-500"
+              }`}
+            >
+              Blog & Guides
             </Link>
 
             <Link
