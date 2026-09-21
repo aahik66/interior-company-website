@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSettings } from "../context/SettingsContext";
 import {
   HiOutlinePhone,
+  HiOutlineMail,
   HiOutlineArrowRight,
   HiOutlineCheckCircle,
 } from "react-icons/hi";
@@ -11,6 +12,7 @@ export default function Hero() {
   const { settings } = useSettings();
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
+  const emailAddress = settings?.email || "contact@dimensioncomposition.com";
   const phoneNumber = settings?.phoneNumber || "+880 1739-835017";
   const secondaryPhone = settings?.secondaryPhoneNumber || "+880 1601-370090";
   const heroVideoUrl =
@@ -53,17 +55,15 @@ export default function Hero() {
       {/* 1. Minimalist Top Ticker */}
       <div className="relative z-30 w-full bg-[#071322]/90 backdrop-blur-sm border-b border-white/10 py-1.5 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 text-[11px] text-slate-300">
-          <div className="flex items-center gap-4 sm:gap-6 overflow-hidden">
-            <span className="inline-flex items-center gap-1.5 text-brand-400 font-medium">
-              <HiOutlineCheckCircle className="h-3.5 w-3.5 text-emerald-400 flex-shrink-0" />
-              1st ISO Certified Quality Standards
-            </span>
-            <span className="hidden sm:inline-flex items-center gap-1 text-slate-400">
-              • 2 Years Free Warranty
-            </span>
-            <span className="hidden md:inline-flex items-center gap-1 text-amber-300/90 font-medium">
-              ★ 700+ Projects Handed Over
-            </span>
+          <div className="flex items-center gap-2 overflow-hidden">
+            <a
+              href={`mailto:${emailAddress}`}
+              className="inline-flex items-center gap-1.5 text-slate-300 hover:text-brand-400 transition"
+              title="Email Us"
+            >
+              <HiOutlineMail className="h-3.5 w-3.5 text-brand-500 flex-shrink-0" />
+              <span className="font-medium">{emailAddress}</span>
+            </a>
           </div>
 
           <div className="flex items-center gap-2 text-[11px] font-medium text-slate-200 ml-auto">
