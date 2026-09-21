@@ -40,14 +40,16 @@ export default function Categories() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((category, idx) => (
-            <Link
-              key={category.name}
-              to={`/portfolio?category=${encodeURIComponent(category.name)}`}
-              className="group overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-[0_14px_40px_-30px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
-              data-aos="fade-up"
-              data-aos-delay={80 + idx * 40}
-            >
+          {categories.map((category, idx) => {
+            const slug = category.name.toLowerCase().trim().replace(/\s+/g, "-");
+            return (
+              <Link
+                key={category.name}
+                to={`/portfolio/category/${slug}`}
+                className="group overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-[0_14px_40px_-30px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2"
+                data-aos="fade-up"
+                data-aos-delay={80 + idx * 40}
+              >
               <div className="relative overflow-hidden">
                 <img
                   src={category.image}
@@ -64,7 +66,8 @@ export default function Categories() {
                 <p className="text-sm text-gray-600 leading-relaxed">{category.description}</p>
               </div>
             </Link>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

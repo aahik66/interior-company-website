@@ -94,11 +94,14 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/projects/category/:categorySlug" element={<Projects />} />
             <Route path="/portfolio" element={<Projects />} />
+            <Route path="/portfolio/category/:categorySlug" element={<Projects />} />
             <Route path="/cost-calculator" element={<CostCalculator />} />
             <Route path="/about" element={<About />} />
             <Route path="/about/:section" element={<About />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/category/:categorySlug" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogSingle />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

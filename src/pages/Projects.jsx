@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import { API_BASE } from "../config/api";
 import ProjectModal from "../components/ProjectModal";
@@ -346,6 +346,9 @@ const officeProjectsData = [
   },
 ];
 
+const slugifyCategory = (name) =>
+  name.toLowerCase().trim().replace(/\s+/g, "-");
+
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeResidenceTab, setActiveResidenceTab] = useState("All");
@@ -354,23 +357,33 @@ export default function Projects() {
 
   const location = useLocation();
   const navigate = useNavigate();
+  const { categorySlug } = useParams();
 
-  // URL Query handling
+  // URL Route Param & Query handling
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const categoryParam = params.get("category");
-    if (categoryParam) {
-      if (officeTabs.some((t) => t.toLowerCase() === categoryParam.toLowerCase())) {
-        setActiveOfficeTab(categoryParam);
+    const targetSlug = categorySlug || params.get("category");
+
+    if (targetSlug) {
+      const cleanTarget = targetSlug.toLowerCase().trim();
+      const matchedOffice = officeTabs.find(
+        (t) => slugifyCategory(t) === cleanTarget || t.toLowerCase() === cleanTarget
+      );
+      const matchedResidence = residenceTabs.find(
+        (t) => slugifyCategory(t) === cleanTarget || t.toLowerCase() === cleanTarget
+      );
+
+      if (matchedOffice) {
+        setActiveOfficeTab(matchedOffice);
         const officeEl = document.getElementById("office-portfolio");
         if (officeEl) officeEl.scrollIntoView({ behavior: "smooth" });
-      } else {
-        setActiveResidenceTab(categoryParam);
+      } else if (matchedResidence) {
+        setActiveResidenceTab(matchedResidence);
         const resEl = document.getElementById("residence-portfolio");
         if (resEl) resEl.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [location.search]);
+  }, [categorySlug, location.search]);
 
   // Load database projects to merge
   useEffect(() => {
@@ -433,6 +446,43 @@ export default function Projects() {
     }
   };
 
+  const handleSelectResidenceTab = (tab) => {
+    setActiveResidenceTab(tab);
+    if (tab === "All") {
+      navigate("/portfolio");
+    } else {
+      navigate(`/portfolio/category/${slugifyCategory(tab)}`);
+    }
+  };
+
+  const handleSelectOfficeTab = (tab) => {
+    setActiveOfficeTab(tab);
+    if (tab === "All") {
+      navigate("/portfolio");
+    } else {
+      navigate(`/portfolio/category/${slugifyCategory(tab)}`);
+    }
+  };
+
+  const currentCategoryName =
+    activeResidenceTab !== "All"
+      ? activeResidenceTab
+      : activeOfficeTab !== "All"
+      ? activeOfficeTab
+      : null;
+
+  const categoryTitle = currentCategoryName
+    ? `${currentCategoryName} Interior Design Projects in Dhaka | Dimension Composition`
+    : "Interior Design Portfolio & Completed Projects in Dhaka | Dimension Composition";
+
+  const categoryDesc = currentCategoryName
+    ? `Explore luxury ${currentCategoryName.toLowerCase()} interior design projects completed by Dimension Composition in Dhaka, Bangladesh. Custom 3D layouts, premium woodwork & execution.`
+    : "Explore luxury residential duplex apartments, corporate office interiors, penthouses, and commercial projects completed by Dimension Composition in Dhaka, Bangladesh.";
+
+  const categoryCanonical = currentCategoryName
+    ? `https://dimensioncomposition.com/portfolio/category/${slugifyCategory(currentCategoryName)}`
+    : "https://dimensioncomposition.com/portfolio";
+
   const projectsSchema = [
     {
       "@context": "https://schema.org",
@@ -447,8 +497,8 @@ export default function Projects() {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Portfolio & Projects",
-          "item": "https://dimensioncomposition.com/portfolio"
+          "name": currentCategoryName ? `Portfolio - ${currentCategoryName}` : "Portfolio & Projects",
+          "item": categoryCanonical
         }
       ]
     }
@@ -457,10 +507,14 @@ export default function Projects() {
   return (
     <main className="w-full min-h-screen bg-gray-50 text-gray-800">
       <SEOHead
-        title="Interior Design Portfolio & Completed Projects in Dhaka | Dimension Composition"
-        description="Explore luxury residential duplex apartments, corporate office interiors, penthouses, and commercial projects completed by Dimension Composition in Dhaka, Bangladesh."
-        keywords="interior design portfolio dhaka, completed interior projects, residential interior gallery, office interior design dhaka, duplex interior bangladesh"
-        canonical="https://dimensioncomposition.com/portfolio"
+        title={categoryTitle}
+        description={categoryDesc}
+        keywords={
+          currentCategoryName
+            ? `${currentCategoryName.toLowerCase()} interior design dhaka, ${currentCategoryName.toLowerCase()} decor bangladesh, completed ${currentCategoryName.toLowerCase()} projects, dimension composition`
+            : "interior design portfolio dhaka, completed interior projects, residential interior gallery, office interior design dhaka, duplex interior bangladesh"
+        }
+        canonical={categoryCanonical}
         schema={projectsSchema}
       />
       {/* ========================================================
@@ -581,7 +635,7 @@ export default function Projects() {
               return (
                 <li key={tab} className="inline-block shrink-0">
                   <button
-                    onClick={() => setActiveResidenceTab(tab)}
+                    onClick={() => handleSelectResidenceTab(tab)}
                     className={`cursor-pointer px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 select-none whitespace-nowrap ${
                       isActive
                         ? "bg-brand-500 text-white shadow-sm border border-brand-500"
@@ -672,7 +726,7 @@ export default function Projects() {
               return (
                 <li key={tab} className="inline-block shrink-0">
                   <button
-                    onClick={() => setActiveOfficeTab(tab)}
+                    onClick={() => handleSelectOfficeTab(tab)}
                     className={`cursor-pointer px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 select-none whitespace-nowrap ${
                       isActive
                         ? "bg-brand-500 text-white shadow-sm border border-brand-500"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import { API_BASE } from "../config/api";
 import {
@@ -13,13 +13,41 @@ import {
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
 
+const slugifyCategory = (name) =>
+  name.toLowerCase().trim().replace(/\s+/g, "-");
+
 export default function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
 
+  const { categorySlug } = useParams();
+  const navigate = useNavigate();
+
   const categories = ["All", "Residential", "Commercial", "Budget Guides", "Materials"];
+
+  // Sync category state with URL param /blog/category/:categorySlug
+  useEffect(() => {
+    if (categorySlug) {
+      const cleanSlug = categorySlug.toLowerCase().trim();
+      const matched = categories.find((c) => slugifyCategory(c) === cleanSlug);
+      if (matched) {
+        setSelectedCategory(matched);
+      }
+    } else {
+      setSelectedCategory("All");
+    }
+  }, [categorySlug]);
+
+  const handleSelectCategory = (cat) => {
+    setSelectedCategory(cat);
+    if (cat === "All") {
+      navigate("/blog");
+    } else {
+      navigate(`/blog/category/${slugifyCategory(cat)}`);
+    }
+  };
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -50,6 +78,20 @@ export default function Blog() {
 
   const featuredBlog = blogs[0];
 
+  const currentCategory = selectedCategory !== "All" ? selectedCategory : null;
+
+  const blogTitle = currentCategory
+    ? `${currentCategory} Interior Design Blogs & Guides Dhaka | Dimension Composition`
+    : "Interior Design Blog & Budget Guides Dhaka | Dimension Composition";
+
+  const blogDesc = currentCategory
+    ? `Read expert ${currentCategory.toLowerCase()} interior design articles, budget tips, and architectural insights for homes & offices in Dhaka, Bangladesh.`
+    : "Expert architectural design insights, apartment interior budgeting guides, material selection tips, & duplex trends in Dhaka, Bangladesh.";
+
+  const blogCanonical = currentCategory
+    ? `https://dimensioncomposition.com/blog/category/${slugifyCategory(currentCategory)}`
+    : "https://dimensioncomposition.com/blog";
+
   const blogSchema = [
     {
       "@context": "https://schema.org",
@@ -64,8 +106,8 @@ export default function Blog() {
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Blog & Guides",
-          "item": "https://dimensioncomposition.com/blog"
+          "name": currentCategory ? `Blog - ${currentCategory}` : "Blog & Guides",
+          "item": blogCanonical
         }
       ]
     },
@@ -73,18 +115,22 @@ export default function Blog() {
       "@context": "https://schema.org",
       "@type": "Blog",
       "name": "Dimension Composition Interior Design Blog",
-      "description": "Expert architectural design insights, interior budgeting guides, and material selection tips in Dhaka, Bangladesh.",
-      "url": "https://dimensioncomposition.com/blog"
+      "description": blogDesc,
+      "url": blogCanonical
     }
   ];
 
   return (
     <main className="w-full min-h-screen bg-slate-50 text-slate-800">
       <SEOHead
-        title="Interior Design Blog & Budget Guides Dhaka | Dimension Composition"
-        description="Expert architectural design insights, apartment interior budgeting guides, material selection tips, & duplex trends in Dhaka, Bangladesh."
-        keywords="interior design blog dhaka, apartment decor guide bangladesh, duplex design tips, interior budget calculator, dimension composition blog"
-        canonical="https://dimensioncomposition.com/blog"
+        title={blogTitle}
+        description={blogDesc}
+        keywords={
+          currentCategory
+            ? `${currentCategory.toLowerCase()} blog dhaka, ${currentCategory.toLowerCase()} interior guide bangladesh, interior calculator, dimension composition`
+            : "interior design blog dhaka, apartment decor guide bangladesh, duplex design tips, interior budget calculator, dimension composition blog"
+        }
+        canonical={blogCanonical}
         schema={blogSchema}
       />
 
@@ -136,7 +182,7 @@ export default function Blog() {
               {categories.map((cat) => (
                 <button
                   key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => handleSelectCategory(cat)}
                   className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${
                     selectedCategory === cat
                       ? "bg-brand-500 text-white shadow-lg shadow-brand-500/30"
