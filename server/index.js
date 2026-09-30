@@ -1,3 +1,4 @@
+import dns from "node:dns";
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
@@ -5,6 +6,13 @@ import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+
+// Set reliable public DNS servers for resolving MongoDB Atlas SRV records
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1"]);
+} catch {
+  // Ignore if not supported in the host environment
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Load environment variables from .env
@@ -108,19 +116,27 @@ async function start() {
           "Primary MongoDB connection failed, falling back to temporary MongoDB server:",
           err.message
         );
+        try {
+          const { MongoMemoryServer } = await import("mongodb-memory-server");
+          mongoMemoryServer = await MongoMemoryServer.create();
+          mongoUri = mongoMemoryServer.getUri();
+          await mongoose.connect(mongoUri);
+          console.log("Connected to temporary MongoDB");
+        } catch (memErr) {
+          throw new Error(`MongoDB connection failed: ${err.message}. Temporary DB failed: ${memErr.message}`);
+        }
+      }
+    } else {
+      try {
         const { MongoMemoryServer } = await import("mongodb-memory-server");
         mongoMemoryServer = await MongoMemoryServer.create();
         mongoUri = mongoMemoryServer.getUri();
+        console.log("No MONGO_URI found, starting temporary MongoDB server");
         await mongoose.connect(mongoUri);
         console.log("Connected to temporary MongoDB");
+      } catch (memErr) {
+        throw new Error(`No MONGO_URI provided and MongoMemoryServer unavailable: ${memErr.message}`);
       }
-    } else {
-      const { MongoMemoryServer } = await import("mongodb-memory-server");
-      mongoMemoryServer = await MongoMemoryServer.create();
-      mongoUri = mongoMemoryServer.getUri();
-      console.log("No MONGO_URI found, starting temporary MongoDB server");
-      await mongoose.connect(mongoUri);
-      console.log("Connected to temporary MongoDB");
     }
 
     await seedProjects();
