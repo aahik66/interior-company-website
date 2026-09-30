@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
       let data = {};
       try {
         data = await res.json();
-      } catch (e) {
+      } catch (_e) {
         throw new Error("কানেকশন আপডেট হয়েছে। দয়া করে পেজটি Hard Refresh (Ctrl + F5) দিন।");
       }
       if (!res.ok) throw new Error(data.message || "Unable to login");
@@ -89,7 +89,7 @@ export function AuthProvider({ children }) {
       let data = {};
       try {
         data = await res.json();
-      } catch (e) {
+      } catch (_e) {
         throw new Error("কানেকশন আপডেট হয়েছে। দয়া করে পেজটি Hard Refresh (Ctrl + F5) দিন।");
       }
       if (!res.ok) throw new Error(data.message || "Unable to setup admin account");

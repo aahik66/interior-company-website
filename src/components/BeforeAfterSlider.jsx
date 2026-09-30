@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { HiOutlineArrowSmRight, HiOutlineClock } from "react-icons/hi";
 
 const transformations = [
@@ -30,7 +30,19 @@ export default function BeforeAfterSlider() {
   const [activeTab, setActiveTab] = useState(0);
   const [sliderPosition, setSliderPosition] = useState(50); // percentage 0 - 100
   const [isDragging, setIsDragging] = useState(false);
+  const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef(null);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        setContainerWidth(containerRef.current.getBoundingClientRect().width);
+      }
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
   const currentItem = transformations[activeTab];
 
@@ -136,9 +148,7 @@ export default function BeforeAfterSlider() {
                 alt={`${currentItem.title} Before`}
                 className="absolute inset-0 h-full w-full object-cover max-w-none"
                 style={{
-                  width: containerRef.current
-                    ? `${containerRef.current.getBoundingClientRect().width}px`
-                    : "100%",
+                  width: containerWidth ? `${containerWidth}px` : "100%",
                 }}
                 draggable="false"
               />

@@ -16,6 +16,8 @@ import { FaWhatsapp } from "react-icons/fa";
 const slugifyCategory = (name) =>
   name.toLowerCase().trim().replace(/\s+/g, "-");
 
+const categories = ["All", "Residential", "Commercial", "Budget Guides", "Materials"];
+
 export default function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -24,8 +26,6 @@ export default function Blog() {
 
   const { categorySlug } = useParams();
   const navigate = useNavigate();
-
-  const categories = ["All", "Residential", "Commercial", "Budget Guides", "Materials"];
 
   // Sync category state with URL param /blog/category/:categorySlug
   useEffect(() => {

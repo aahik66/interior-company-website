@@ -68,7 +68,7 @@ async function deploy() {
             skippedCount++;
             console.log(`[${i + 1}/${allFiles.length}] Already up to date: ${relativePath}`);
           }
-        } catch (e) {
+        } catch (_e) {
           needsUpload = true;
         }
       }
@@ -114,7 +114,7 @@ async function deploy() {
     try {
       await client.remove("default.php");
       console.log("Removed default.php placeholder.");
-    } catch (e) {
+    } catch (_e) {
       // Not present or already removed
     }
 

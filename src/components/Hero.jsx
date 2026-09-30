@@ -101,7 +101,9 @@ export default function Hero() {
             preload="none"
             onLoadedData={() => setIsVideoLoaded(true)}
             poster={heroPosterUrl}
-            className="h-full w-full object-cover scale-105 transition duration-1000"
+            className={`h-full w-full object-cover transition-all duration-1000 ${
+              isVideoLoaded ? "opacity-100 scale-100" : "opacity-80 scale-105"
+            }`}
           >
             <source src={heroVideoUrl} type="video/mp4" />
           </video>

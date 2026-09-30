@@ -11,7 +11,7 @@ import { API_BASE } from "../config/api";
  * - https://www.youtube.com/shorts/VIDEO_ID
  * - Direct VIDEO_ID
  */
-export function extractYoutubeId(url) {
+function extractYoutubeId(url) {
   if (!url) return "";
   const trimmed = url.trim();
   if (trimmed.length === 11 && !trimmed.includes("/") && !trimmed.includes("?")) {

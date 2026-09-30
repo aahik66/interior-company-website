@@ -4,6 +4,7 @@ Allow: /
 Allow: /portfolio
 Allow: /cost-calculator
 Allow: /about
+Allow: /blog
 Allow: /contact
 Allow: /uploads/
 

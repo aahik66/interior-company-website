@@ -11,7 +11,6 @@ export default function AdminLogin() {
   const location = useLocation();
 
   const [isSetupMode, setIsSetupMode] = useState(false);
-  const [checkingStatus, setCheckingStatus] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -44,8 +43,6 @@ export default function AdminLogin() {
         }
       } catch (err) {
         console.warn("Could not check admin status:", err);
-      } finally {
-        setCheckingStatus(false);
       }
     }
     checkAdminStatus();
@@ -59,7 +56,7 @@ export default function AdminLogin() {
 
     try {
       if (isSetupMode) {
-        const res = await setupAdmin({
+        await setupAdmin({
           name: form.name,
           email: form.email,
           password: form.password,

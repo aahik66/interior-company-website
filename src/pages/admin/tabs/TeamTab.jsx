@@ -37,10 +37,13 @@ export default function TeamTab() {
   const fetchTeam = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/team`);
+      const res = await fetch(`${API_BASE}/team?t=${Date.now()}`);
       if (res.ok) {
         const data = await res.json();
         setTeam(data);
+        try {
+          localStorage.setItem("dc_team_members_cache", JSON.stringify(data));
+        } catch (_e) {}
       }
     } catch (err) {
       console.warn("Failed to fetch team members", err);
@@ -60,7 +63,7 @@ export default function TeamTab() {
       role: "",
       education: "",
       experience: "5+ Years Experience",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      image: "/assets/team/kawsar-ahmed.jpg",
       bio: "",
       order: team.length + 1,
     });
@@ -89,7 +92,13 @@ export default function TeamTab() {
       await authFetch(`${API_BASE}/team/${id}`, {
         method: "DELETE",
       });
-      setTeam((prev) => prev.filter((m) => m._id !== id));
+      setTeam((prev) => {
+        const next = prev.filter((m) => m._id !== id);
+        try {
+          localStorage.setItem("dc_team_members_cache", JSON.stringify(next));
+        } catch (_e) {}
+        return next;
+      });
     } catch (err) {
       alert(err.message || "Failed to delete team member");
     }
@@ -106,13 +115,25 @@ export default function TeamTab() {
           method: "PUT",
           body: JSON.stringify(formData),
         });
-        setTeam((prev) => prev.map((m) => (m._id === editingMember._id ? updated : m)));
+        setTeam((prev) => {
+          const next = prev.map((m) => (m._id === editingMember._id ? updated : m));
+          try {
+            localStorage.setItem("dc_team_members_cache", JSON.stringify(next));
+          } catch (_e) {}
+          return next;
+        });
       } else {
         const created = await authFetch(`${API_BASE}/team`, {
           method: "POST",
           body: JSON.stringify(formData),
         });
-        setTeam((prev) => [...prev, created]);
+        setTeam((prev) => {
+          const next = [...prev, created];
+          try {
+            localStorage.setItem("dc_team_members_cache", JSON.stringify(next));
+          } catch (_e) {}
+          return next;
+        });
       }
       setIsModalOpen(false);
     } catch (err) {

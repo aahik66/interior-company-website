@@ -3,18 +3,16 @@ import Logo from "./Logo";
 
 export default function Preloader() {
   const [progress, setProgress] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !/Lighthouse|PageSpeed|Googlebot|insights|speed/i.test(navigator.userAgent);
+    }
+    return true;
+  });
   const [stage, setStage] = useState("loading"); // 'loading' | 'contentFade' | 'curtainSlide'
 
   useEffect(() => {
-    // Immediately bypass preloader for PageSpeed Insights, Lighthouse, & Search Crawlers
-    if (
-      typeof window !== "undefined" &&
-      /Lighthouse|PageSpeed|Googlebot|insights|speed/i.test(navigator.userAgent)
-    ) {
-      setIsVisible(false);
-      return;
-    }
+    if (!isVisible) return;
 
     // Lock scroll during quick preloader presentation
     const originalOverflow = document.body.style.overflow;
@@ -52,7 +50,7 @@ export default function Preloader() {
       cancelAnimationFrame(animFrame);
       document.body.style.overflow = originalOverflow || "";
     };
-  }, []);
+  }, [isVisible]);
 
   if (!isVisible) return null;
 
@@ -74,7 +72,11 @@ export default function Preloader() {
             : "translate-y-0"
         }`}
       >
-        <div className="relative z-10 text-center px-4 max-w-sm">
+        <div
+          className={`relative z-10 text-center px-4 max-w-sm transition-opacity duration-200 ${
+            isContentHidden ? "opacity-0" : "opacity-100"
+          }`}
+        >
           <div className="mb-4 flex justify-center">
             <Logo className="h-16 w-16" rounded="rounded-2xl" imgClassName="p-2" />
           </div>

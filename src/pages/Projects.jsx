@@ -373,15 +373,18 @@ export default function Projects() {
         (t) => slugifyCategory(t) === cleanTarget || t.toLowerCase() === cleanTarget
       );
 
-      if (matchedOffice) {
-        setActiveOfficeTab(matchedOffice);
-        const officeEl = document.getElementById("office-portfolio");
-        if (officeEl) officeEl.scrollIntoView({ behavior: "smooth" });
-      } else if (matchedResidence) {
-        setActiveResidenceTab(matchedResidence);
-        const resEl = document.getElementById("residence-portfolio");
-        if (resEl) resEl.scrollIntoView({ behavior: "smooth" });
-      }
+      const timer = setTimeout(() => {
+        if (matchedOffice) {
+          setActiveOfficeTab(matchedOffice);
+          const officeEl = document.getElementById("office-portfolio");
+          if (officeEl) officeEl.scrollIntoView({ behavior: "smooth" });
+        } else if (matchedResidence) {
+          setActiveResidenceTab(matchedResidence);
+          const resEl = document.getElementById("residence-portfolio");
+          if (resEl) resEl.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [categorySlug, location.search]);
 

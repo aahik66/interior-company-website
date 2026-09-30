@@ -48,7 +48,7 @@ export default function QuotesTab() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      const res = await authFetch(`${API_BASE}/quotes/${id}/status`, {
+      await authFetch(`${API_BASE}/quotes/${id}/status`, {
         method: "PATCH",
         body: JSON.stringify({ status: newStatus }),
       });

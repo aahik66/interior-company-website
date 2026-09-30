@@ -27,57 +27,75 @@ const aboutTabs = [
   { id: "career", label: "Career", icon: HiOutlineBriefcase },
 ];
 
-// Team Members Dataset
-const teamMembers = [
+const TEAM_CACHE_KEY = "dc_team_members_cache";
+
+const normalizeTeamImage = (imgUrl = "", name = "") => {
+  if (!imgUrl) return "/assets/team/kawsar-ahmed.jpg";
+  const str = (imgUrl + " " + name).toLowerCase();
+  if (str.includes("swapno-puron-5") || str.includes("kawsar")) {
+    return "/assets/team/kawsar-ahmed.jpg";
+  }
+  if (str.includes("swapno-puron-8") || str.includes("anisur")) {
+    return "/assets/team/anisur-rahman.jpg";
+  }
+  if (str.includes("69034") || str.includes("shohid")) {
+    return "/assets/team/shohid-sumon.jpg";
+  }
+  return imgUrl;
+};
+
+// Real Team Members Dataset
+const defaultTeamMembers = [
   {
-    name: "Ar. Tanzim Rahman",
-    role: "Founder & Principal Architect",
-    education: "B.Arch (BUET), MIAB",
-    experience: "12+ Years Experience",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-    bio: "Pioneering architectural minimalism and sustainable luxury residences across Dhaka's upscale neighborhoods.",
-  },
-  {
-    name: "Fariha Chowdhury",
-    role: "Head of Interior Architecture",
-    education: "M.Sc Interior Design, UK",
-    experience: "9+ Years Experience",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+    _id: "6aa7786f3cc116e47fbb4a0a",
+    name: "Engr. Kawsar Ahmed",
+    role: "CEO",
+    education: "BSc in Engineering",
+    experience: "20+ Years Experience",
+    image: "/assets/team/kawsar-ahmed.jpg",
     bio: "Specializing in ergonomic residential floor layouts, acoustic environments, and bespoke custom furniture curation.",
+    order: 1,
   },
   {
-    name: "Engr. Mahmudul Hasan",
-    role: "Chief Project & Execution Engineer",
-    education: "B.Sc Civil Engineering (CUET)",
-    experience: "10+ Years Experience",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
-    bio: "Guarantees precision on-site execution, structural safety compliance, and zero-defect handover timelines.",
+    _id: "6aa7786f3cc116e47fbb4a09",
+    name: "Ar. Anisur Rahman",
+    role: "Founder & Principal Architect",
+    education: "BSc in Architecture",
+    experience: "15+ Years Experience",
+    image: "/assets/team/anisur-rahman.jpg",
+    bio: "Pioneering architectural minimalism and sustainable luxury residences across Dhaka's upscale neighborhoods.",
+    order: 2,
   },
   {
-    name: "Shakil Ahmed",
-    role: "Lead 3D Architectural Visualizer",
-    education: "B.Sc Multimedia & Animation",
-    experience: "7+ Years Experience",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    bio: "Transforms blueprints into photorealistic 4K 3D renders, VR walkthroughs, and lifelike lighting simulations.",
-  },
-  {
-    name: "Nusrat Jahan",
-    role: "Senior Interior Stylist & Colorist",
-    education: "Fine Arts & Spatial Design (DU)",
-    experience: "6+ Years Experience",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
-    bio: "Curates Italian marbles, customized textiles, bespoke wallpapers, and mood-adaptive lighting palettes.",
-  },
-  {
-    name: "Rafiul Islam",
-    role: "Quality Assurance Specialist",
-    education: "Diploma in Materials & Wood Technology",
-    experience: "8+ Years Experience",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
-    bio: "Ensures every batch of HPL, plywood, and Blum soft-close fittings meets international anti-moisture standards.",
+    _id: "6aacd591394307bf7d21686b",
+    name: "Engr. Shohid Bin Ali Sumon",
+    role: "Project Coordinator",
+    education: "BSc in Civil",
+    experience: "5+ Years Experience",
+    image: "/assets/team/shohid-sumon.jpg",
+    bio: "Supervising turnkey site execution, structural coordination, and timely handover.",
+    order: 3,
   },
 ];
+
+const getCachedTeam = () => {
+  if (typeof window === "undefined") return defaultTeamMembers;
+  try {
+    const cached = localStorage.getItem(TEAM_CACHE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.map((m) => ({
+          ...m,
+          image: normalizeTeamImage(m.image, m.name),
+        }));
+      }
+    }
+  } catch (_err) {
+    // fallback to default
+  }
+  return defaultTeamMembers;
+};
 
 // Career Positions Dataset
 const jobOpenings = [
@@ -121,21 +139,28 @@ const jobOpenings = [
 
 export default function About() {
   const [activeTab, setActiveTab] = useState("overview");
-  const [teamList, setTeamList] = useState(teamMembers);
+  const [teamList, setTeamList] = useState(getCachedTeam);
   const location = useLocation();
 
   useEffect(() => {
     const fetchTeam = async () => {
       try {
-        const res = await fetch(`${API_BASE}/team`);
+        const res = await fetch(`${API_BASE}/team?t=${Date.now()}`);
         if (res.ok) {
           const data = await res.json();
           if (Array.isArray(data) && data.length > 0) {
-            setTeamList(data);
+            const normalized = data.map((m) => ({
+              ...m,
+              image: normalizeTeamImage(m.image, m.name),
+            }));
+            setTeamList(normalized);
+            try {
+              localStorage.setItem(TEAM_CACHE_KEY, JSON.stringify(normalized));
+            } catch (_e) {}
           }
         }
       } catch (err) {
-        console.warn("Could not load dynamic team members, using defaults:", err);
+        console.warn("Could not load dynamic team members, using cached/defaults:", err);
       }
     };
     fetchTeam();
@@ -147,11 +172,14 @@ export default function About() {
     const tabParam = params.get("tab") || hash;
 
     if (tabParam && aboutTabs.some((t) => t.id === tabParam)) {
-      setActiveTab(tabParam);
-      const sectionEl = document.getElementById(tabParam);
-      if (sectionEl) {
-        sectionEl.scrollIntoView({ behavior: "smooth" });
-      }
+      const timer = setTimeout(() => {
+        setActiveTab(tabParam);
+        const sectionEl = document.getElementById(tabParam);
+        if (sectionEl) {
+          sectionEl.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [location.hash, location.search]);
 
@@ -270,7 +298,7 @@ export default function About() {
             ======================================================== */}
         <section id="overview" className="scroll-mt-32">
           <div className="text-center mb-8 sm:mb-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand-500">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-600">
               Overview
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
@@ -295,17 +323,17 @@ export default function About() {
               {/* Core Pillars */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
                 <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-                  <h4 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                     <HiOutlineCheckCircle className="h-5 w-5 text-brand-500" />
                     Turnkey Execution
-                  </h4>
+                  </h3>
                   <p className="text-xs text-slate-500 mt-1">Design, 3D renders, carpentry, electrics, and finishing under one roof.</p>
                 </div>
                 <div className="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-                  <h4 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                  <h3 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
                     <HiOutlineClock className="h-5 w-5 text-brand-500" />
                     Guaranteed Timeline
-                  </h4>
+                  </h3>
                   <p className="text-xs text-slate-500 mt-1">Rigid project milestone tracking with on-time delivery assurance.</p>
                 </div>
               </div>
@@ -345,7 +373,7 @@ export default function About() {
             ======================================================== */}
         <section id="team" className="scroll-mt-32 pt-8 border-t border-slate-200">
           <div className="text-center mb-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand-500">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-600">
               People
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
@@ -368,8 +396,10 @@ export default function About() {
                 {/* Team Photo with BD Interior elementor-animation-pop on hover */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                   <img
-                    src={member.image}
+                    src={normalizeTeamImage(member.image, member.name)}
                     alt={member.name}
+                    width="600"
+                    height="450"
                     className="h-full w-full object-cover elementor-animation-pop transition-transform duration-500"
                     loading="lazy"
                   />
@@ -386,16 +416,20 @@ export default function About() {
                     <h3 className="text-base font-bold text-slate-900 group-hover:text-brand-500 transition-colors">
                       {member.name}
                     </h3>
-                    <p className="text-xs font-semibold text-brand-500 mt-0.5">
+                    <p className="text-xs font-bold text-brand-600 mt-0.5">
                       {member.role}
                     </p>
-                    <p className="text-xs text-slate-400 mt-1 flex items-center gap-1">
-                      <HiOutlineAcademicCap className="h-3.5 w-3.5 text-slate-400" />
-                      {member.education}
-                    </p>
-                    <p className="text-xs text-slate-600 mt-3 leading-relaxed">
-                      {member.bio}
-                    </p>
+                    {Boolean(member.education?.trim()) && (
+                      <p className="text-xs text-slate-500 mt-1 flex items-center gap-1 font-medium">
+                        <HiOutlineAcademicCap className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+                        <span>{member.education}</span>
+                      </p>
+                    )}
+                    {Boolean(member.bio?.trim()) && (
+                      <p className="text-xs text-slate-600 mt-3 leading-relaxed">
+                        {member.bio}
+                      </p>
+                    )}
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
@@ -404,7 +438,7 @@ export default function About() {
                       href={`https://wa.me/8801739835017?text=Hello%20${encodeURIComponent(member.name)},%20I%20would%20like%20to%20consult%20regarding%20my%20interior%20project.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-brand-500 font-semibold hover:underline flex items-center gap-1"
+                      className="text-brand-600 font-bold hover:underline flex items-center gap-1"
                     >
                       Consult →
                     </a>
@@ -420,7 +454,7 @@ export default function About() {
             ======================================================== */}
         <section id="quality-policy" className="scroll-mt-32 pt-8 border-t border-slate-200">
           <div className="text-center mb-8 sm:mb-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand-500">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-600">
               Standards
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
@@ -434,7 +468,7 @@ export default function About() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             <div className="rounded-xl border border-slate-200 bg-white p-5 hover:border-slate-300 transition">
-              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center mb-4">
+              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-600 flex items-center justify-center mb-4">
                 <HiOutlineShieldCheck className="h-5 w-5" />
               </div>
               <h3 className="text-sm font-bold text-slate-900">5-Year Workmanship Warranty</h3>
@@ -444,7 +478,7 @@ export default function About() {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-white p-5 hover:border-slate-300 transition">
-              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center mb-4">
+              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-600 flex items-center justify-center mb-4">
                 <HiOutlineCube className="h-5 w-5" />
               </div>
               <h3 className="text-sm font-bold text-slate-900">Grade-A Raw Materials</h3>
@@ -454,7 +488,7 @@ export default function About() {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-white p-5 hover:border-slate-300 transition">
-              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center mb-4">
+              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-600 flex items-center justify-center mb-4">
                 <HiOutlineClipboardCheck className="h-5 w-5" />
               </div>
               <h3 className="text-sm font-bold text-slate-900">4-Stage Quality Audit</h3>
@@ -464,7 +498,7 @@ export default function About() {
             </div>
 
             <div className="rounded-xl border border-slate-200 bg-white p-5 hover:border-slate-300 transition">
-              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-500 flex items-center justify-center mb-4">
+              <div className="h-10 w-10 rounded-lg bg-brand-500/10 text-brand-600 flex items-center justify-center mb-4">
                 <HiOutlineBadgeCheck className="h-5 w-5" />
               </div>
               <h3 className="text-sm font-bold text-slate-900">Zero Hidden Costs Guarantee</h3>
@@ -480,7 +514,7 @@ export default function About() {
             ======================================================== */}
         <section id="career" className="scroll-mt-32 pt-8 border-t border-slate-200">
           <div className="text-center mb-8 sm:mb-12">
-            <span className="text-xs font-semibold uppercase tracking-widest text-brand-500">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-600">
               Opportunities
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
@@ -507,7 +541,7 @@ export default function About() {
                   <div>
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-brand-500">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-brand-600">
                           {job.department}
                         </span>
                         <h3 className="text-base font-bold text-slate-900 mt-0.5">
@@ -538,12 +572,12 @@ export default function About() {
                   </div>
 
                   <div className="mt-5 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                    <span className="text-xs text-slate-400">Immediate Joining</span>
+                    <span className="text-xs text-slate-500 font-medium">Immediate Joining</span>
                     <a
                       href={whatsappApply}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white px-4 py-2.5 text-xs font-semibold shadow-sm transition"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 text-xs font-semibold shadow-sm transition"
                     >
                       Apply via WhatsApp →
                     </a>

@@ -32,8 +32,11 @@ export default function Navbar() {
 
   // Close dropdown on route change
   useEffect(() => {
-    setAboutDropdownOpen(false);
-    setMenuOpen(false);
+    const timer = setTimeout(() => {
+      setAboutDropdownOpen(false);
+      setMenuOpen(false);
+    }, 0);
+    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   const navStyles =

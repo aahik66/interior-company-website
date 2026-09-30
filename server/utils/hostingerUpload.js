@@ -1,5 +1,4 @@
 import * as ftp from "basic-ftp";
-import fs from "fs";
 
 /**
  * Uploads a local file directly to Hostinger's public_html/uploads directory via FTP.
