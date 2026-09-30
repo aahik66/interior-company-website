@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import SEOHead from "../components/SEOHead";
 import { API_BASE } from "../config/api";
+import { trackLead, trackContact } from "../utils/pixel";
 import {
   HiOutlineChevronRight,
   HiOutlineCalculator,
@@ -277,6 +278,7 @@ export default function CostCalculator() {
 
   // WhatsApp Send Estimate
   const handleSendWhatsApp = () => {
+    trackContact("WhatsApp", "cost-calculator-estimate");
     const summaryText = `*Dimension Composition Interior Estimate*
 Client Name: ${contact.name || "Valued Client"}
 Location: ${contact.location || "Dhaka"}
@@ -293,6 +295,14 @@ I would like to discuss this estimate with a Senior Architect.`;
 
   const handleShowFinalEstimate = () => {
     setCurrentStep(5);
+    // Track Meta Pixel Lead Event
+    trackLead({
+      content_name: `Cost Estimate - ${calculationResults.pkgObj?.name || "Interior"}`,
+      content_category: "Cost Calculator",
+      value: calculationResults.lowRange,
+      currency: "BDT",
+    });
+
     // Persist lead to backend API so admin can follow up in Admin Panel
     fetch(`${API_BASE}/quotes`, {
       method: "POST",

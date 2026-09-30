@@ -55,6 +55,14 @@ const settingSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    facebookPixelId: {
+      type: String,
+      default: "",
+    },
+    googleAnalyticsId: {
+      type: String,
+      default: "G-FRZD7DRX0M",
+    },
   },
   { timestamps: true }
 );

@@ -43,6 +43,8 @@ export default function SettingsTab() {
     showHeroTitle: true,
     showHeroSubtitle: true,
     showHeroBadge: true,
+    facebookPixelId: "",
+    googleAnalyticsId: "G-FRZD7DRX0M",
   });
 
   const [loading, setLoading] = useState(true);
@@ -301,7 +303,65 @@ export default function SettingsTab() {
           </div>
         </div>
 
-        {/* 4. Hero Banner & Background Video Customization */}
+        {/* 4. Meta (Facebook) Pixel & Campaign Tracking */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-4">
+          <div className="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <span>4. Meta (Facebook) Pixel & Ad Campaign Tracking</span>
+                {form.facebookPixelId ? (
+                  <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                    Pixel Active
+                  </span>
+                ) : (
+                  <span className="text-[10px] bg-amber-100 text-amber-800 font-medium px-2 py-0.5 rounded-full">
+                    Ready for ID (ডামি ট্র্যাকার সক্রিয়)
+                  </span>
+                )}
+              </h3>
+              <p className="text-xs text-slate-500 mt-0.5">
+                ফেসবুকে বিজ্ঞাপন চালানোর সময় প্রতিটি পেজ ভিউ, কোটেশন রিকোয়েস্ট (Lead) ও WhatsApp ক্লিক ট্র্যাক করতে আপনার Pixel ID দিন।
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div>
+              <label className="block font-bold text-slate-700 mb-1 flex items-center gap-1.5">
+                <FaFacebook className="text-[#1877F2]" /> Meta / Facebook Pixel ID
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. 1234567890123456"
+                value={form.facebookPixelId || ""}
+                onChange={(e) => setForm({ ...form, facebookPixelId: e.target.value.trim() })}
+                className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none font-mono text-xs"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">
+                Facebook Events Manager থেকে পাওয়া ১৫-১৬ ডিজিটের Pixel ID পেস্ট করুন।
+              </p>
+            </div>
+
+            <div>
+              <label className="block font-bold text-slate-700 mb-1 flex items-center gap-1.5">
+                <HiOutlineGlobeAlt className="text-emerald-500" /> Google Analytics Tag ID
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. G-FRZD7DRX0M"
+                value={form.googleAnalyticsId || ""}
+                onChange={(e) => setForm({ ...form, googleAnalyticsId: e.target.value.trim() })}
+                className="w-full rounded-xl border border-slate-200 p-2.5 focus:border-brand-500 focus:outline-none font-mono text-xs"
+              />
+              <p className="text-[11px] text-slate-400 mt-1">
+                Google Analytics 4 Measurement ID
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 5. Hero Banner & Background Video Customization */}
         <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-sm space-y-6">
           <div className="border-b border-slate-100 pb-3">
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { trackLead } from "../utils/pixel";
 import { HiOutlinePhone, HiOutlineMail, HiOutlineArrowRight, HiOutlineLocationMarker } from "react-icons/hi";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { API_BASE } from "../config/api";
@@ -71,6 +72,10 @@ export default function ContactSection() {
       await authFetch(`${API_BASE}/contact`, {
         method: "POST",
         body: JSON.stringify(formData),
+      });
+      trackLead({
+        content_name: formData.projectType || "Contact Section Inquiry",
+        content_category: "Contact Form",
       });
       setStatus({
         type: "success",

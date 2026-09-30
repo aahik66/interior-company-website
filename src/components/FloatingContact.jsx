@@ -4,6 +4,8 @@ import { HiOutlinePhone, HiOutlineX, HiOutlineChatAlt2 } from "react-icons/hi";
 import { useSettings } from "../context/SettingsContext";
 import Logo from "./Logo";
 
+import { trackContact } from "../utils/pixel";
+
 export default function FloatingContact() {
   const { settings } = useSettings();
   const PHONE_NUMBER = settings?.phoneNumber || "+880 1739-835017";
@@ -27,6 +29,7 @@ export default function FloatingContact() {
   }, []);
 
   const openWhatsApp = (customMessage = "") => {
+    trackContact("WhatsApp", "floating-widget");
     const defaultMsg = "Hello Dimension Composition! I would like to consult about an interior design project.";
     const encoded = encodeURIComponent(customMessage || defaultMsg);
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`, "_blank");
@@ -113,6 +116,7 @@ export default function FloatingContact() {
 
             <a
               href={`tel:${PHONE_NUMBER.replace(/\s+/g, "")}`}
+              onClick={() => trackContact("Phone Call", "floating-widget-main")}
               className="inline-flex h-9 px-2.5 items-center justify-center gap-1 rounded-xl bg-gray-100 text-gray-800 text-xs font-semibold transition hover:bg-brand-500 hover:text-white"
               title={`Call Main: ${PHONE_NUMBER}`}
               aria-label="Call studio main"
@@ -124,6 +128,7 @@ export default function FloatingContact() {
             {SECONDARY_PHONE && (
               <a
                 href={`tel:${SECONDARY_PHONE.replace(/\s+/g, "")}`}
+                onClick={() => trackContact("Phone Call", "floating-widget-secondary")}
                 className="inline-flex h-9 px-2 items-center justify-center rounded-xl bg-gray-100 text-gray-700 text-xs font-bold transition hover:bg-brand-500 hover:text-white"
                 title={`Call Secondary: ${SECONDARY_PHONE}`}
                 aria-label="Call secondary phone"

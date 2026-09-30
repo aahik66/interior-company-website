@@ -9,6 +9,10 @@ import MotionBackground from "./components/MotionBackground";
 import FloatingContact from "./components/FloatingContact";
 import Preloader from "./components/Preloader";
 
+import { useLocation } from "react-router-dom";
+import { useSettings } from "./context/SettingsContext";
+import { initFacebookPixel, trackPageView } from "./utils/pixel";
+
 // Lazy-loaded pages for mobile speed optimization & smaller JS bundle size
 const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
@@ -16,6 +20,7 @@ const About = lazy(() => import("./pages/About"));
 const CostCalculator = lazy(() => import("./pages/CostCalculator"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogSingle = lazy(() => import("./pages/BlogSingle"));
+const PackageLanding = lazy(() => import("./pages/PackageLanding"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 
@@ -57,6 +62,19 @@ function PublicLayout() {
   );
 }
 
+function PixelTracker() {
+  const location = useLocation();
+  const { settings } = useSettings();
+
+  useEffect(() => {
+    const pixelId = settings?.facebookPixelId || "1234567890123456";
+    initFacebookPixel(pixelId);
+    trackPageView();
+  }, [location.pathname, settings?.facebookPixelId]);
+
+  return null;
+}
+
 function App() {
   useEffect(() => {
     AOS.init({
@@ -69,6 +87,7 @@ function App() {
 
   return (
     <Router>
+      <PixelTracker />
       <Suspense fallback={<PageFallback />}>
         <Routes>
           {/* Admin Console Routes (No Navbar/Footer overlap) */}
@@ -93,6 +112,9 @@ function App() {
           {/* Public Website Routes */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/packages" element={<PackageLanding />} />
+            <Route path="/packages/:packageSlug" element={<PackageLanding />} />
+            <Route path="/offers" element={<PackageLanding />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/category/:categorySlug" element={<Projects />} />
             <Route path="/portfolio" element={<Projects />} />

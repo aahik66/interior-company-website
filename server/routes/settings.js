@@ -27,6 +27,8 @@ const DEFAULT_SETTINGS = {
   showHeroTitle: true,
   showHeroSubtitle: true,
   showHeroBadge: true,
+  facebookPixelId: "",
+  googleAnalyticsId: "G-FRZD7DRX0M",
 };
 
 // Get settings (Public)
@@ -72,6 +74,8 @@ router.put("/", adminRequired, async (req, res) => {
       "showHeroTitle",
       "showHeroSubtitle",
       "showHeroBadge",
+      "facebookPixelId",
+      "googleAnalyticsId",
     ];
 
     fields.forEach((field) => {
