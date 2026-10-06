@@ -2,9 +2,23 @@ import * as ftp from "basic-ftp";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, "../dist");
+
+// FTP credentials are read from the gitignored root .env file (never commit them)
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+const FTP_CONFIG = {
+  host: process.env.FTP_HOST,
+  user: process.env.FTP_USER,
+  password: process.env.FTP_PASSWORD,
+  secure: false,
+};
+if (!FTP_CONFIG.host || !FTP_CONFIG.user || !FTP_CONFIG.password) {
+  console.error("Missing FTP_HOST / FTP_USER / FTP_PASSWORD in .env");
+  process.exit(1);
+}
 
 // Get all files recursively from local directory
 function getAllFiles(dirPath, arrayOfFiles = []) {
@@ -28,12 +42,7 @@ async function deploy() {
   try {
     console.log("==================================================");
     console.log("Connecting to Hostinger (dimensioncomposition.com)...");
-    await client.access({
-      host: "145.79.25.212",
-      user: "u488507743.dimension",
-      password: "Worldwide7171@",
-      secure: false,
-    });
+    await client.access(FTP_CONFIG);
     console.log("Connected successfully!");
 
     const allFiles = getAllFiles(distDir);
@@ -57,7 +66,7 @@ async function deploy() {
       }
 
       // Code files (html, js, css, htaccess) must always be uploaded to guarantee index.html & JS bundles sync
-      const isCodeFile = /\.(html|js|css|htaccess|json)$/i.test(fileName);
+      const isCodeFile = /\.(html|js|css|htaccess|json|txt|xml)$/i.test(fileName);
       let needsUpload = isCodeFile;
 
       if (!isCodeFile) {
@@ -89,12 +98,7 @@ async function deploy() {
             if (attempts < 3) {
               console.log("  Reconnecting and retrying in 3s...");
               await new Promise(res => setTimeout(res, 3000));
-              await client.access({
-                host: "145.79.25.212",
-                user: "u488507743.dimension",
-                password: "Worldwide7171@",
-                secure: false,
-              });
+              await client.access(FTP_CONFIG);
               if (remoteDir === "." || remoteDir === "") {
                 await client.cd("/");
               } else {

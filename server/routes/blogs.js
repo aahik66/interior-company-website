@@ -1,7 +1,12 @@
 import express from "express";
 import Blog from "../models/Blog.js";
+import { adminRequired } from "../middleware/admin.js";
 
 const router = express.Router();
+
+// Listing drafts (?admin=true) requires an admin session
+const adminIfDrafts = (req, res, next) =>
+  req.query.admin === "true" ? adminRequired(req, res, next) : next();
 
 // Helper slugify
 const slugify = (text) =>
@@ -13,7 +18,7 @@ const slugify = (text) =>
     .replace(/^-+|-+$/g, "");
 
 // Get all blog posts
-router.get("/", async (req, res) => {
+router.get("/", adminIfDrafts, async (req, res) => {
   try {
     const { category, search, admin } = req.query;
     let query = admin === "true" ? {} : { isPublished: true };
@@ -57,7 +62,7 @@ router.get("/:slugOrId", async (req, res) => {
 });
 
 // Create new blog post
-router.post("/", async (req, res) => {
+router.post("/", adminRequired, async (req, res) => {
   try {
     const {
       title,
@@ -115,7 +120,7 @@ router.post("/", async (req, res) => {
 });
 
 // Update blog post
-router.put("/:id", async (req, res) => {
+router.put("/:id", adminRequired, async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = { ...req.body };
@@ -149,7 +154,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete blog post
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", adminRequired, async (req, res) => {
   try {
     const { id } = req.params;
     const deleted = await Blog.findByIdAndDelete(id);

@@ -11,9 +11,13 @@ export async function uploadFileToHostinger(localPath, filename) {
 
   try {
     const ftpHost = process.env.FTP_HOST || "145.79.25.212";
-    const ftpUser = process.env.FTP_USER || "u488507743.dimension";
-    const ftpPass = process.env.FTP_PASS || "Worldwide7171@";
+    const ftpUser = process.env.FTP_USER;
+    const ftpPass = process.env.FTP_PASS || process.env.FTP_PASSWORD;
     const publicDomain = process.env.PUBLIC_DOMAIN || "https://dimensioncomposition.com";
+
+    if (!ftpUser || !ftpPass) {
+      throw new Error("FTP_USER / FTP_PASS environment variables are not set");
+    }
 
     console.log(`Connecting to Hostinger FTP (${ftpHost}) to upload ${filename}...`);
     await client.access({

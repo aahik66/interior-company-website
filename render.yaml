@@ -9,10 +9,15 @@ services:
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
+      # Secrets: set these in the Render dashboard (Environment tab), never in this public file
       - key: MONGO_URI
-        value: mongodb+srv://kur9426_db_user:AtVOwEWXA1YhJrro@cluster0.nqndxh8.mongodb.net/dimension_composition?retryWrites=true&w=majority&appName=Cluster0
+        sync: false
       - key: JWT_SECRET
-        value: dimension_composition_secret_2026
+        sync: false
+      - key: FTP_USER
+        sync: false
+      - key: FTP_PASS
+        sync: false
       - key: NODE_ENV
         value: production
       - key: CLIENT_URL

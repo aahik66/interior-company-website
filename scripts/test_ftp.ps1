@@ -1,5 +1,9 @@
-$user = 'u488507743.dimension'
-$pass = 'Worldwide7171@'
+# Credentials are read from the gitignored root .env file
+$envFile = Join-Path $PSScriptRoot '..\.env'
+$vars = @{}
+Get-Content $envFile | Where-Object { $_ -match '^\s*([A-Z_]+)=(.*)$' } | ForEach-Object { $vars[$Matches[1]] = $Matches[2].Trim() }
+$user = $vars['FTP_USER']
+$pass = $vars['FTP_PASSWORD']
 
 Write-Host "Testing $user with UsePassive = false..."
 try {
