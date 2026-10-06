@@ -53,7 +53,7 @@ export default function Categories() {
               <div className="relative overflow-hidden">
                 <img
                   src={category.image}
-                  alt={category.name}
+                  alt={`${category.name} Luxury Interior Design in Bangladesh`}
                   className="h-52 w-full object-cover elementor-animation-pop transition-transform duration-500"
                   loading="lazy"
                 />

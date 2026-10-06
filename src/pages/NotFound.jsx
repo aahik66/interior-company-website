@@ -1,0 +1,74 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { HiOutlineHome, HiOutlineCalculator, HiOutlineCollection, HiOutlineArrowRight } from "react-icons/hi";
+import { FaWhatsapp } from "react-icons/fa";
+import SEOHead from "../components/SEOHead";
+
+export default function NotFound() {
+  return (
+    <main className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-24 bg-gradient-to-b from-slate-950 via-[#071322] to-slate-900 text-white text-center">
+      <SEOHead
+        title="404 - Page Not Found | Dimension Composition"
+        description="The page you are looking for does not exist or has been moved. Explore Dimension Composition's luxury interior portfolio and cost calculator."
+        canonical="https://dimensioncomposition.com/404"
+      />
+
+      <div className="max-w-2xl mx-auto space-y-6">
+        {/* Subtle Pill */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-400">
+          Error 404
+        </div>
+
+        {/* Large Decorative 404 Heading */}
+        <h1 className="text-6xl sm:text-8xl font-extrabold tracking-tight text-white drop-shadow-md">
+          4<span className="text-brand-500">0</span>4
+        </h1>
+
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-200">
+          Architectural Blueprint Not Found
+        </h2>
+
+        <p className="text-slate-400 text-sm sm:text-base max-w-lg mx-auto leading-relaxed">
+          The page or design layout you are searching for might have been relocated, redesigned, or is no longer available.
+        </p>
+
+        {/* Helpful Direct Quick Action Buttons */}
+        <div className="pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 rounded-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 text-sm font-semibold shadow-lg shadow-brand-500/20 transition hover:scale-105"
+          >
+            <HiOutlineHome className="h-4 w-4" />
+            Back to Home
+          </Link>
+
+          <Link
+            to="/portfolio"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white px-6 py-3 text-sm font-semibold backdrop-blur transition hover:scale-105"
+          >
+            <HiOutlineCollection className="h-4 w-4" />
+            View Portfolio
+          </Link>
+
+          <Link
+            to="/cost-calculator"
+            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white px-6 py-3 text-sm font-semibold backdrop-blur transition hover:scale-105"
+          >
+            <HiOutlineCalculator className="h-4 w-4" />
+            Cost Calculator
+          </Link>
+
+          <a
+            href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20need%20assistance%20on%20your%20website."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-6 py-3 text-sm font-semibold shadow-md transition hover:scale-105"
+          >
+            <FaWhatsapp className="h-4 w-4" />
+            WhatsApp Support
+          </a>
+        </div>
+      </div>
+    </main>
+  );
+}

@@ -217,6 +217,7 @@ export default function PackageLanding() {
         title={`${pkg.title} | Dimension Composition`}
         description={pkg.tagline}
         keywords="interior design package dhaka, flat interior cost, apartment interior bangladesh, luxury interior design"
+        canonical="https://dimensioncomposition.com/packages"
       />
 
       {/* 1. Trust & Urgency Announcement Bar */}

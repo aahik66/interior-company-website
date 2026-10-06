@@ -6,19 +6,23 @@ import Process from "../components/Process";
 import VideoTestimonials from "../components/VideoTestimonials";
 import Reviews from "../components/Reviews";
 import Careers from "../components/Careers";
+import FAQSection, { faqData } from "../components/FAQSection";
 import ContactSection from "../components/ContactSection";
 
 export default function Home() {
   const homeSchema = [
     {
       "@context": "https://schema.org",
-      "@type": "HomeAndConstructionBusiness",
+      "@type": ["HomeAndConstructionBusiness", "ProfessionalService"],
       "name": "Dimension Composition",
+      "alternateName": "Dimension Composition Interior Architecture",
       "image": "https://dimensioncomposition.com/assets/logo.png",
       "@id": "https://dimensioncomposition.com/#organization",
       "url": "https://dimensioncomposition.com",
       "telephone": "+8801739835017",
       "priceRange": "৳৳৳",
+      "currenciesAccepted": "BDT",
+      "paymentAccepted": "Cash, Credit Card, Bank Transfer, bKash, Nagad",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "House -204, Port Road, Block-A, Bashundhara Riverview, Hashnabad",
@@ -31,6 +35,33 @@ export default function Home() {
         "latitude": 23.6850,
         "longitude": 90.4125
       },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Bangladesh"
+        },
+        {
+          "@type": "City",
+          "name": "Dhaka"
+        },
+        {
+          "@type": "City",
+          "name": "Chittagong"
+        },
+        {
+          "@type": "City",
+          "name": "Sylhet"
+        }
+      ],
+      "knowsAbout": [
+        "Residential Interior Design",
+        "Commercial Office Interior Design",
+        "Luxury Duplex Home Architecture",
+        "Modern Apartment Interior",
+        "Modular Kitchen Design",
+        "Hospitality & Restaurant Interior",
+        "Turnkey Interior Execution"
+      ],
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
@@ -55,30 +86,42 @@ export default function Home() {
         "https://www.facebook.com/ashik5795",
         "https://www.instagram.com"
       ],
-      "description": "Premier luxury interior design and architectural planning firm in Dhaka, Bangladesh."
+      "description": "Leading luxury residential and commercial interior design & architectural planning firm in Dhaka, serving clients across all of Bangladesh."
     },
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "Luxury Residential & Commercial Interior Design in Dhaka",
+      "name": "Turnkey Residential & Commercial Interior Design in Bangladesh",
       "provider": {
         "@type": "LocalBusiness",
         "name": "Dimension Composition"
       },
       "areaServed": {
-        "@type": "City",
-        "name": "Dhaka"
+        "@type": "Country",
+        "name": "Bangladesh"
       },
-      "description": "Custom interior architecture, duplex home design, modern apartment decor, modular kitchen, and luxury office interior execution."
+      "description": "Comprehensive turnkey interior design for luxury duplex homes, apartments, modular kitchens, and corporate offices across Dhaka and all over Bangladesh."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData.map((item) => ({
+        "@type": "Question",
+        "name": item.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": item.answer
+        }
+      }))
     }
   ];
 
   return (
     <main className="relative w-full bg-gray-50 text-gray-800">
       <SEOHead
-        title="Best Interior Firm in Dhaka | Dimension Composition"
-        description="Dimension Composition is recognized as the best interior firm in Dhaka, Bangladesh. Specializing in luxury residential duplex, apartment, office, & commercial interior design in Gulshan, Banani, Uttara, & Bashundhara."
-        keywords="best interior firm in dhaka, best interior design company in dhaka, top interior designer bangladesh, luxury interior design dhaka, duplex home design, office interior firm, dimension composition"
+        title="Best Interior Design Company in Bangladesh | Dimension Composition"
+        description="Dimension Composition is a leading interior design company in Bangladesh. Turnkey luxury residential duplex, flat, & commercial corporate office interior solutions across Dhaka & nationwide."
+        keywords="interior design company in bangladesh, best interior firm in dhaka, luxury duplex interior design bangladesh, modern apartment interior, commercial office interior dhaka, restaurant interior firm bd, turnkey interior solution, dimension composition"
         canonical="https://dimensioncomposition.com/"
         schema={homeSchema}
       />
@@ -88,6 +131,7 @@ export default function Home() {
       <Process />
       <VideoTestimonials />
       <Reviews />
+      <FAQSection />
       <Careers />
       <ContactSection />
     </main>

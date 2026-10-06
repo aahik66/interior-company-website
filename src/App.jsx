@@ -23,6 +23,7 @@ const BlogSingle = lazy(() => import("./pages/BlogSingle"));
 const PackageLanding = lazy(() => import("./pages/PackageLanding"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin Components (Lazy Loaded)
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -127,6 +128,8 @@ function App() {
             <Route path="/blog/:slug" element={<BlogSingle />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            {/* 404 Catch-All Route for SEO and User Experience */}
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
