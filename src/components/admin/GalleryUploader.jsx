@@ -8,6 +8,7 @@ import {
   HiOutlinePhotograph,
   HiOutlineLink,
 } from "react-icons/hi";
+import { handleImageError } from "../../utils/imageUrl";
 
 export default function GalleryUploader({
   gallery = [],
@@ -163,9 +164,7 @@ export default function GalleryUploader({
                 src={imgUrl}
                 alt={`Gallery ${idx + 1}`}
                 className="h-full w-full object-cover"
-                onError={(e) => {
-                  e.target.src = "/assets/projects/livingroom1.jpeg";
-                }}
+                onError={handleImageError}
               />
               {/* Delete Overlay Button */}
               <button

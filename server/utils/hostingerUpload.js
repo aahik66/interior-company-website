@@ -11,8 +11,8 @@ export async function uploadFileToHostinger(localPath, filename) {
 
   try {
     const ftpHost = process.env.FTP_HOST || "145.79.25.212";
-    const ftpUser = process.env.FTP_USER;
-    const ftpPass = process.env.FTP_PASS || process.env.FTP_PASSWORD;
+    const ftpUser = process.env.FTP_USER || "u488507743.dimension";
+    const ftpPass = process.env.FTP_PASS || process.env.FTP_PASSWORD || "@Hostinger7171";
     const publicDomain = process.env.PUBLIC_DOMAIN || "https://dimensioncomposition.com";
 
     if (!ftpUser || !ftpPass) {
@@ -37,7 +37,8 @@ export async function uploadFileToHostinger(localPath, filename) {
     return `${publicDomain}/uploads/${filename}`;
   } catch (err) {
     console.warn("Hostinger FTP upload warning, using local fallback:", err.message);
-    return `/uploads/${filename}`;
+    const backendBase = process.env.BACKEND_URL || "https://interior-company-website.onrender.com";
+    return `${backendBase}/uploads/${filename}`;
   } finally {
     client.close();
   }

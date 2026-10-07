@@ -9,6 +9,7 @@ import {
   HiOutlineX,
   HiOutlineCheck,
 } from "react-icons/hi";
+import { handleImageError } from "../../utils/imageUrl";
 
 export default function MediaUploader({
   label,
@@ -194,9 +195,7 @@ export default function MediaUploader({
                 src={value}
                 alt="Uploaded Preview"
                 className="h-14 w-20 object-cover rounded-lg border border-slate-300 bg-white flex-shrink-0"
-                onError={(e) => {
-                  e.target.src = "/assets/projects/livingroom1.jpeg";
-                }}
+                onError={handleImageError}
               />
             )}
             <div className="overflow-hidden">

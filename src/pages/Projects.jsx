@@ -7,6 +7,7 @@ import {
   HiOutlineChevronRight,
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
+import { handleImageError } from "../utils/imageUrl";
 
 // Core 4 Sectors (Matching BD Interior's "Our Core Portfolio")
 const coreSectors = [
@@ -670,6 +671,7 @@ export default function Projects() {
                   alt={project.title}
                   className="h-full w-full object-cover elementor-animation-pop transition-transform duration-500"
                   loading="lazy"
+                  onError={handleImageError}
                 />
 
                 {/* Category badge */}
@@ -761,6 +763,7 @@ export default function Projects() {
                   alt={project.title}
                   className="h-full w-full object-cover elementor-animation-pop transition-transform duration-500"
                   loading="lazy"
+                  onError={handleImageError}
                 />
 
                 {/* Category badge */}

@@ -17,6 +17,7 @@ import {
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
 import { API_BASE } from "../config/api";
+import { handleImageError } from "../utils/imageUrl";
 
 // 4 Core About Categories matching bdinterior.com
 const aboutTabs = [
@@ -401,6 +402,7 @@ export default function About() {
                     height="450"
                     className="h-full w-full object-cover elementor-animation-pop transition-transform duration-500"
                     loading="lazy"
+                    onError={handleImageError}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100 flex items-end p-4">
                     <span className="text-xs font-medium text-white">

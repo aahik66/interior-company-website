@@ -9,6 +9,7 @@ import {
   HiOutlineCheckCircle,
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
+import { handleImageError } from "../utils/imageUrl";
 
 export default function ProjectModal({ project, onClose }) {
   const [activeImageIdx, setActiveImageIdx] = useState(0);
@@ -105,6 +106,7 @@ export default function ProjectModal({ project, onClose }) {
                 src={gallery[activeImageIdx]}
                 alt={`${project.title} - view ${activeImageIdx + 1}`}
                 className="h-full w-full object-cover transition duration-500"
+                onError={handleImageError}
               />
 
               {/* Counter Pill */}
@@ -150,6 +152,7 @@ export default function ProjectModal({ project, onClose }) {
                       src={imgUrl}
                       alt={`Thumbnail ${idx + 1}`}
                       className="h-full w-full object-cover"
+                      onError={handleImageError}
                     />
                   </button>
                 ))}

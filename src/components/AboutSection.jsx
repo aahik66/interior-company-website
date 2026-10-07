@@ -14,6 +14,7 @@ import {
 import { FaWhatsapp } from "react-icons/fa";
 import { API_BASE } from "../config/api";
 import { useSettings } from "../context/SettingsContext";
+import { handleImageError } from "../utils/imageUrl";
 
 // Fallback Leadership & Architectural Principals Dataset
 const defaultLeaders = [
@@ -274,6 +275,7 @@ export default function AboutSection() {
                     height="450"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
+                    onError={handleImageError}
                   />
                   <div className="absolute bottom-2.5 left-2.5 bg-slate-950/85 text-white text-[11px] font-medium px-2.5 py-1 rounded">
                     {leader.experience || "Senior Specialist"}

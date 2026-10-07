@@ -12,6 +12,7 @@ import {
 } from "react-icons/hi";
 import MediaUploader from "../../../components/admin/MediaUploader";
 import GalleryUploader from "../../../components/admin/GalleryUploader";
+import { handleImageError } from "../../../utils/imageUrl";
 
 const CATEGORIES = [
   "All",
@@ -259,9 +260,7 @@ export default function ProjectsTab({ isAddModalOpen, setIsAddModalOpen }) {
                           src={p.image}
                           alt={p.title}
                           className="h-12 w-16 object-cover rounded-lg border border-slate-200 bg-slate-100 flex-shrink-0"
-                          onError={(e) => {
-                            e.target.src = "/assets/projects/livingroom1.jpeg";
-                          }}
+                          onError={handleImageError}
                         />
                         <div>
                           <p className="font-bold text-slate-900 line-clamp-1">{p.title}</p>

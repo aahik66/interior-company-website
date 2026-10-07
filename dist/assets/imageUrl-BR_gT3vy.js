@@ -1,0 +1,1 @@
+function s(t,a="/assets/projects/livingroom3.jpg"){const e=t.target;if(!e.dataset.triedFallback&&(e.dataset.triedFallback="render",e.src.includes("/uploads/"))){const r=e.src.split("/uploads/").pop();e.src=`https://interior-company-website.onrender.com/uploads/${r}`;return}e.dataset.triedFallback==="render"&&(e.dataset.triedFallback="default",e.src=a)}export{s as h};

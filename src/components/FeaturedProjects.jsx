@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HiOutlineArrowRight, HiOutlineLocationMarker, HiOutlineClock, HiOutlineEye } from "react-icons/hi";
 import { API_BASE } from "../config/api";
 import ProjectModal from "./ProjectModal";
+import { handleImageError } from "../utils/imageUrl";
 
 const fallbackProjects = [
   {
@@ -161,6 +162,7 @@ export default function FeaturedProjects() {
                   height="412"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
+                  onError={handleImageError}
                 />
                 
                 {/* Category Badge */}
