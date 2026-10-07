@@ -1,6 +1,7 @@
 import SEOHead from "../components/SEOHead";
 import Hero from "../components/Hero";
 import MarqueeStrip from "../components/MarqueeStrip";
+import AboutSection from "../components/AboutSection";
 import Categories from "../components/Categories";
 import Process from "../components/Process";
 import VideoTestimonials from "../components/VideoTestimonials";
@@ -127,6 +128,7 @@ export default function Home() {
       />
       <Hero />
       <MarqueeStrip />
+      <AboutSection />
       <Categories />
       <Process />
       <VideoTestimonials />
