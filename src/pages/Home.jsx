@@ -10,6 +10,7 @@ import Reviews from "../components/Reviews";
 import FAQSection, { faqData } from "../components/FAQSection";
 import Careers from "../components/Careers";
 import ContactSection from "../components/ContactSection";
+import FeaturedProjects from "../components/FeaturedProjects";
 
 export default function Home() {
   const homeSchema = [
@@ -132,6 +133,7 @@ export default function Home() {
       <AboutSection />
       <VideoTestimonials />
       <Categories />
+      <FeaturedProjects />
       <WhyChooseUs />
       <Process />
       <Reviews />

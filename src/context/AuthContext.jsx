@@ -19,6 +19,21 @@ export function AuthProvider({ children }) {
         const parsed = JSON.parse(stored);
         setUser(parsed.user || null);
         setToken(parsed.token || null);
+
+        // Verify/refresh user profile from server to ensure up-to-date role (e.g. upgraded to admin)
+        if (parsed.token) {
+          fetch(`${API_BASE}/auth/me`, {
+            headers: { Authorization: `Bearer ${parsed.token}` },
+          })
+            .then((r) => (r.ok ? r.json() : null))
+            .then((data) => {
+              if (data?.user) {
+                setUser(data.user);
+                persist({ user: data.user, token: parsed.token });
+              }
+            })
+            .catch(() => {});
+        }
       } catch {
         localStorage.removeItem(STORAGE_KEY);
       }

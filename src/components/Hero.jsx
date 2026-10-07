@@ -16,8 +16,9 @@ export default function Hero() {
   const phoneNumber = settings?.phoneNumber || "+880 1739-835017";
   const secondaryPhone = settings?.secondaryPhoneNumber || "+880 1601-370090";
   const heroVideoUrl =
-    settings?.heroVideoUrl ||
-    "https://bdinterior.com/wp-content/uploads/2025/09/homepage-Video-3.mp4";
+    settings?.heroVideoUrl !== undefined
+      ? settings.heroVideoUrl
+      : "https://bdinterior.com/wp-content/uploads/2025/09/homepage-Video-3.mp4";
   const heroPosterUrl = settings?.heroPosterUrl || "/assets/hero.jpg";
 
   const heroTitle = settings?.heroTitle !== undefined ? settings.heroTitle : "Leading Interior Design Company in Bangladesh";
@@ -90,23 +91,31 @@ export default function Hero() {
 
       {/* 2. Main Hero Video Banner */}
       <section className="relative isolate flex min-h-[82vh] sm:min-h-[86vh] w-full flex-col justify-center items-center overflow-hidden">
-        {/* Background Video Walkthrough (Configurable via Admin Panel) */}
+        {/* Background Video Walkthrough or Poster (Configurable via Admin Panel) */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <video
-            key={heroVideoUrl}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            onLoadedData={() => setIsVideoLoaded(true)}
-            poster={heroPosterUrl}
-            className={`h-full w-full object-cover transition-all duration-1000 ${
-              isVideoLoaded ? "opacity-100 scale-100" : "opacity-80 scale-105"
-            }`}
-          >
-            <source src={heroVideoUrl} type="video/mp4" />
-          </video>
+          {heroVideoUrl ? (
+            <video
+              key={heroVideoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              onLoadedData={() => setIsVideoLoaded(true)}
+              poster={heroPosterUrl}
+              className={`h-full w-full object-cover transition-all duration-1000 ${
+                isVideoLoaded ? "opacity-100 scale-100" : "opacity-80 scale-105"
+              }`}
+            >
+              <source src={heroVideoUrl} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={heroPosterUrl}
+              alt={settings?.companyName || "Dimension Composition"}
+              className="h-full w-full object-cover"
+            />
+          )}
         </div>
 
         {/* Clean, balanced overlay for video visibility & crisp typography */}

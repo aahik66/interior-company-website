@@ -174,7 +174,7 @@ export default function VideoTestimonials() {
 
             return (
               <div
-                key={item.id}
+                key={item._id || item.id || idx}
                 data-aos="fade-up"
                 data-aos-delay={60 + (idx % 3) * 60}
                 onClick={() => setActiveVideo(item)}

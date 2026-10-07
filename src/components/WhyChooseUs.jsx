@@ -8,6 +8,7 @@ import {
 } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
+import { useSettings } from "../context/SettingsContext";
 
 const pillars = [
   {
@@ -49,6 +50,10 @@ const pillars = [
 ];
 
 export default function WhyChooseUs() {
+  const { settings } = useSettings();
+  const whatsappNum = settings?.whatsappNumber || "8801739835017";
+  const companyName = settings?.companyName || "Dimension Composition";
+
   return (
     <section id="why-choose-us" className="relative w-full bg-[#f8fafc] py-16 sm:py-24 text-slate-900 border-y border-slate-200/80">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -104,8 +109,8 @@ export default function WhyChooseUs() {
                 </div>
 
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
-                  <span>Dimension Composition</span>
-                  <span className="text-[#f15a24] font-bold">Standard Standard</span>
+                  <span>{companyName}</span>
+                  <span className="text-[#f15a24] font-bold">Standard</span>
                 </div>
               </div>
             );
@@ -125,7 +130,7 @@ export default function WhyChooseUs() {
 
           <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
             <a
-              href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20would%20like%20to%20discuss%20my%20interior%20project."
+              href={`https://wa.me/${whatsappNum}?text=Hello%20${encodeURIComponent(companyName)}!%20I%20would%20like%20to%20discuss%20my%20interior%20project.`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 text-xs sm:text-sm font-bold shadow transition"

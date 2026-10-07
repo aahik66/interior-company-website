@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   HiOutlineShieldCheck,
@@ -11,9 +12,11 @@ import {
   HiOutlineBadgeCheck,
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";
+import { API_BASE } from "../config/api";
+import { useSettings } from "../context/SettingsContext";
 
-// Leadership & Architectural Principals Dataset
-const leaders = [
+// Fallback Leadership & Architectural Principals Dataset
+const defaultLeaders = [
   {
     name: "Engr. Kawsar Ahmed",
     role: "Chief Executive Officer (CEO)",
@@ -41,6 +44,34 @@ const leaders = [
 ];
 
 export default function AboutSection() {
+  const { settings } = useSettings();
+  const whatsappNum = settings?.whatsappNumber || "8801739835017";
+  const companyName = settings?.companyName || "Dimension Composition";
+
+  const [teamMembers, setTeamMembers] = useState(() => {
+    try {
+      const cached = localStorage.getItem("dc_team_members_cache");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (_e) {}
+    return defaultLeaders;
+  });
+
+  useEffect(() => {
+    fetch(`${API_BASE}/team?t=${Date.now()}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setTeamMembers(data);
+          try {
+            localStorage.setItem("dc_team_members_cache", JSON.stringify(data));
+          } catch (_e) {}
+        }
+      })
+      .catch((err) => console.warn("Using offline team records:", err.message));
+  }, []);
   return (
     <section
       id="about"
@@ -58,7 +89,7 @@ export default function AboutSection() {
             <div className="space-y-2">
               <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#f15a24]">
                 <span className="h-[2px] w-6 bg-[#f15a24]" />
-                <span>About Dimension Composition</span>
+                <span>About {companyName}</span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-slate-950 tracking-tight leading-[1.2]">
@@ -68,7 +99,7 @@ export default function AboutSection() {
             </div>
 
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
-              <strong>Dimension Composition</strong> is a leading interior design company in Dhaka, Bangladesh, 
+              <strong>{companyName}</strong> is a leading interior design company in Dhaka, Bangladesh, 
               creating thoughtful spaces that respond to how people live, work, and experience their surroundings. 
               With <strong>10+ years of experience</strong> and <strong>250+ completed projects</strong>, we provide 
               comprehensive turnkey interior solutions across Bangladesh. From site visits and 3D concepts to final execution, 
@@ -230,14 +261,14 @@ export default function AboutSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {leaders.map((leader) => (
+            {teamMembers.map((leader) => (
               <div
-                key={leader.name}
+                key={leader._id || leader.id || leader.name}
                 className="group rounded-2xl overflow-hidden bg-slate-50/60 border border-slate-200/90 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                   <img
-                    src={leader.image}
+                    src={leader.image || "/assets/team/kawsar-ahmed.jpg"}
                     alt={`${leader.name} - ${leader.role}`}
                     width="600"
                     height="450"
@@ -245,7 +276,7 @@ export default function AboutSection() {
                     loading="lazy"
                   />
                   <div className="absolute bottom-2.5 left-2.5 bg-slate-950/85 text-white text-[11px] font-medium px-2.5 py-1 rounded">
-                    {leader.experience}
+                    {leader.experience || "Senior Specialist"}
                   </div>
                 </div>
 
@@ -259,17 +290,17 @@ export default function AboutSection() {
                     </p>
                     <p className="text-xs text-slate-500 mt-1.5 flex items-center gap-1.5 font-medium">
                       <HiOutlineAcademicCap className="h-4 w-4 text-slate-400 shrink-0" />
-                      <span>{leader.degree}</span>
+                      <span>{leader.education || leader.degree || "Professional Architect"}</span>
                     </p>
                     <p className="text-xs sm:text-[13px] text-slate-600 mt-3 leading-relaxed">
-                      {leader.bio}
+                      {leader.bio || "Dedicated architectural coordinate handling spatial layout and turnkey finishing."}
                     </p>
                   </div>
 
                   <div className="mt-5 pt-3.5 border-t border-slate-200 flex items-center justify-between">
-                    <span className="text-[11px] text-slate-400 font-medium">Dimension Composition</span>
+                    <span className="text-[11px] text-slate-400 font-medium">{companyName}</span>
                     <a
-                      href={`https://wa.me/8801739835017?text=Hello%20${encodeURIComponent(leader.name)},%20I%20would%20like%20to%20consult%20regarding%20my%20interior%20project.`}
+                      href={`https://wa.me/${whatsappNum}?text=Hello%20${encodeURIComponent(leader.name)},%20I%20would%20like%20to%20consult%20regarding%20my%20interior%20project.`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-[#f15a24] transition"
