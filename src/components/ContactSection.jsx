@@ -219,6 +219,45 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+
+      {/* Google Maps Location Embed */}
+      <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
+        <div
+          data-aos="fade-up"
+          className="rounded-3xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-400">
+                Find Us on Map
+              </p>
+              <h3 className="text-lg sm:text-xl font-bold text-white mt-1">
+                Studio Location & Directions
+              </h3>
+            </div>
+            <a
+              href="https://share.google/87jB2rW9qSHbPTqSX"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-400 hover:text-brand-300 transition"
+            >
+              Open in Google Maps →
+            </a>
+          </div>
+          <div className="w-full h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-inner">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2531.162202662292!2d90.43053613558244!3d23.675650680796256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b96d6d28b9d3%3A0x1c706776e12518a5!2sCity%20Convention%20Hall%20%26%20Rooftop%20Restaurant!5e1!3m2!1sen!2sbd!4v1791349226037!5m2!1sen!2sbd"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              title="Dimension Composition Studio Location"
+            />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
