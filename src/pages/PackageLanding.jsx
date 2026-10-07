@@ -10,7 +10,6 @@ import {
   HiOutlinePhone,
   HiOutlineShieldCheck,
   HiOutlineClock,
-  HiOutlineSparkles,
   HiOutlineBadgeCheck,
   HiOutlineArrowRight,
   HiOutlineCheck,
@@ -223,7 +222,7 @@ export default function PackageLanding() {
       {/* 1. Trust & Urgency Announcement Bar */}
       <div className="bg-gradient-to-r from-brand-600 via-amber-600 to-brand-500 text-white text-xs sm:text-sm font-semibold py-2.5 px-4 text-center shadow-lg">
         <span className="inline-flex items-center gap-2">
-          <HiOutlineSparkles className="h-4 w-4 animate-spin" />
+          <HiOutlineBadgeCheck className="h-4 w-4" />
           <span>ফেসবুক ক্যাম্পেইন অফার: এই মাসে ফ্রি ৩ডি লেআউট কনসাল্টেশন ও স্পট বুকিংয়ে বিশেষ ডিসকাউন্ট!</span>
         </span>
       </div>

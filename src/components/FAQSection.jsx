@@ -44,19 +44,16 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="w-full bg-slate-900 py-16 sm:py-24 text-white relative overflow-hidden">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/5 rounded-full blur-[140px] pointer-events-none" />
-
+    <section id="faq" className="w-full bg-slate-900 py-16 sm:py-24 text-white relative">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center space-y-3 mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/30 bg-brand-500/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-400">
-            <HiOutlineQuestionMarkCircle className="h-4 w-4" />
-            Got Questions? We Have Answers
+          <div className="flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-400">
+            <HiOutlineQuestionMarkCircle className="h-4 w-4 text-orange-400" />
+            <span>Questions & Answers</span>
           </div>
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Frequently Asked <span className="text-brand-500">Questions</span>
+            Frequently Asked <span className="text-orange-400">Questions</span>
           </h2>
           <p className="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
             Everything you need to know about interior design costs, timelines, architectural consultation, and execution in Dhaka, Bangladesh.
@@ -70,9 +67,9 @@ export default function FAQSection() {
             return (
               <div
                 key={index}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   isOpen
-                    ? "border-brand-500/50 bg-slate-800/80 shadow-lg shadow-brand-500/10"
+                    ? "border-slate-700 bg-slate-800/90"
                     : "border-slate-800 bg-slate-800/40 hover:border-slate-700 hover:bg-slate-800/60"
                 }`}
               >
@@ -86,9 +83,9 @@ export default function FAQSection() {
                     {item.question}
                   </span>
                   <span
-                    className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center border transition-transform duration-300 ${
+                    className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center border transition-transform duration-200 ${
                       isOpen
-                        ? "rotate-180 bg-brand-500 border-brand-500 text-white"
+                        ? "rotate-180 bg-slate-700 border-slate-600 text-white"
                         : "border-slate-700 bg-slate-900 text-slate-400"
                     }`}
                   >
@@ -97,7 +94,7 @@ export default function FAQSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-slate-700/50 pt-3 animate-fadeIn">
+                  <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm sm:text-base text-slate-300 leading-relaxed border-t border-slate-700/50 pt-3">
                     <p>{item.answer}</p>
                   </div>
                 )}
@@ -107,7 +104,7 @@ export default function FAQSection() {
         </div>
 
         {/* Quick CTA footer inside FAQ */}
-        <div className="mt-12 p-6 rounded-2xl bg-gradient-to-r from-slate-800/60 via-slate-800 to-slate-800/60 border border-slate-700 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 p-6 rounded-2xl bg-slate-800 border border-slate-700/80 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-left">
             <h4 className="text-base font-bold text-white">Have a specific architectural query?</h4>
             <p className="text-xs sm:text-sm text-slate-400">Speak directly with our senior design team today.</p>
@@ -115,7 +112,7 @@ export default function FAQSection() {
           <div className="flex flex-wrap items-center gap-3">
             <Link
               to="/cost-calculator"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white px-5 py-2.5 text-xs sm:text-sm font-semibold transition hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-white px-5 py-2.5 text-xs sm:text-sm font-semibold transition"
             >
               Estimate Cost Online
             </Link>
@@ -123,7 +120,7 @@ export default function FAQSection() {
               href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20have%20an%20interior%20design%20query."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 text-xs sm:text-sm font-semibold shadow transition hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white px-5 py-2.5 text-xs sm:text-sm font-semibold shadow transition"
             >
               <FaWhatsapp className="h-4 w-4" />
               WhatsApp Us

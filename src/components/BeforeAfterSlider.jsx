@@ -75,10 +75,6 @@ export default function BeforeAfterSlider() {
 
   return (
     <section id="transformations" className="relative w-full bg-[#08121f] text-white py-24 overflow-hidden">
-      {/* Background Decorative Glow */}
-      <div className="absolute top-1/4 -left-40 h-96 w-96 rounded-full bg-brand-500/15 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-10 -right-40 h-96 w-96 rounded-full bg-brand-accent/15 blur-[120px] pointer-events-none" />
-
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center space-y-3" data-aos="fade-up">

@@ -9,7 +9,6 @@ import {
   HiOutlineEye,
   HiOutlineCheckCircle,
   HiOutlineClock,
-  HiOutlineSparkles,
   HiOutlineAcademicCap,
   HiOutlineCube,
   HiOutlineClipboardCheck,

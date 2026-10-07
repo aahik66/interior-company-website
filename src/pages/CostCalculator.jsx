@@ -11,7 +11,6 @@ import {
   HiOutlineOfficeBuilding,
   HiOutlinePhone,
   HiOutlinePrinter,
-  HiOutlineSparkles,
   HiOutlineArrowLeft,
   HiOutlineArrowRight,
   HiOutlineBadgeCheck,

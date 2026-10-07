@@ -8,7 +8,6 @@ import {
   HiOutlineUser,
   HiOutlineArrowRight,
   HiOutlineChevronRight,
-  HiOutlineSparkles,
   HiOutlineBookOpen,
 } from "react-icons/hi";
 import { FaWhatsapp } from "react-icons/fa";

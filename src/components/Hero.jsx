@@ -112,9 +112,6 @@ export default function Hero() {
         {/* Clean, balanced overlay for video visibility & crisp typography */}
         <div className="absolute inset-0 z-10 bg-gradient-to-r from-black/85 via-black/60 to-black/40 backdrop-brightness-[0.98]" />
 
-        {/* Subtle Ambient Light */}
-        <div className="absolute top-1/4 left-10 z-10 h-72 w-96 rounded-full bg-brand-500/10 blur-[130px] pointer-events-none" />
-
         {/* Left-Corner Minimalist Content Container */}
         <div className="relative z-20 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24 my-auto">
           <div className="max-w-2xl text-left space-y-4 sm:space-y-5">
