@@ -1,74 +1,107 @@
 import {
   HiOutlineChatAlt2,
   HiOutlinePencilAlt,
+  HiOutlineClipboardList,
   HiOutlineCog,
-  HiOutlineHome,
+  HiOutlineBadgeCheck,
 } from "react-icons/hi";
 
 const steps = [
   {
-    title: "Consultation",
-    description: "We listen, learn, and map out your lifestyle, project scope, and investment level.",
+    number: "01",
+    title: "Consultation & Space Analysis",
+    description: "Detailed on-site walkthrough to analyze your space, understand family rituals or business workflow, and map out budget goals.",
     icon: HiOutlineChatAlt2,
   },
   {
-    title: "Design Planning",
-    description: "Concept boards, material palettes, spatial planning, and 3D visuals to align on direction.",
+    number: "02",
+    title: "Concept & 3D Visualization",
+    description: "Architectural 2D space planning, realistic photorealistic 3D walkthrough renderings, and curated material sample palettes.",
     icon: HiOutlinePencilAlt,
   },
   {
-    title: "Execution",
-    description: "Procurement, vendor coordination, and site supervision to keep quality and timelines tight.",
+    number: "03",
+    title: "Detailed Planning & Fixed BOQ",
+    description: "Itemized Bill of Quantities with transparent line-item pricing, architectural working drawings, and agreed project timeline.",
+    icon: HiOutlineClipboardList,
+  },
+  {
+    number: "04",
+    title: "Professional On-Site Execution",
+    description: "In-house joinery fabrication at our workshop, site framing, electrical integration, and 4-stage quality inspections.",
     icon: HiOutlineCog,
   },
   {
-    title: "Delivery",
-    description: "Styling, handover, and post-install walkthroughs to ensure every detail feels perfect.",
-    icon: HiOutlineHome,
+    number: "05",
+    title: "Handover & 5-Year Support",
+    description: "Zero-defect final walkthrough, thorough deep cleaning, key handover, 5-year written warranty, and continuous after-sales care.",
+    icon: HiOutlineBadgeCheck,
   },
 ];
 
 export default function Process() {
   return (
-    <section id="process" className="w-full bg-gray-50 py-12 sm:py-20">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 sm:gap-12 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-2 text-center" data-aos="fade-up">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-500">
-            Our process
-          </p>
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-4xl tracking-tight">
-            From first conversation to final reveal
+    <section id="process" className="w-full bg-[#f8fafc] py-16 sm:py-24 border-b border-slate-200/80">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 sm:gap-16 px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header matching bestinteriordesign.com.bd */}
+        <div className="flex flex-col items-center text-center space-y-3" data-aos="fade-up">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#f15a24]">
+            <span className="h-[2px] w-6 bg-[#f15a24]" />
+            <span>Work Methodology</span>
+            <span className="h-[2px] w-6 bg-[#f15a24]" />
+          </div>
+
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Best Interior Design Process <br className="hidden sm:inline" />
+            <span className="text-slate-600 font-semibold">— From Concept to Key Handover</span>
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 sm:max-w-3xl sm:mx-auto">
-            A seamless, guided journey with transparent milestones, so you always know what happens next.
+
+          <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal">
+            From initial concept to final completion, your project follows a clear, practical, and disciplined workflow tailored to your exact lifestyle and investment level.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {/* 5 Sequential Steps Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {steps.map((step, idx) => {
             const Icon = step.icon;
             return (
               <div
                 key={step.title}
                 data-aos="fade-up"
-                data-aos-delay={80 + idx * 60}
-                className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.35)] transition hover:-translate-y-1 hover:shadow-2xl"
+                data-aos-delay={idx * 60}
+                className="group relative rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs hover:shadow-lg hover:border-slate-300 transition-all duration-300 flex flex-col justify-between"
               >
-                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-500 to-brand-accent opacity-0 transition group-hover:opacity-100" />
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-500 ring-1 ring-brand-100">
-                  <Icon className="h-6 w-6" />
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs font-mono font-bold text-slate-400 group-hover:text-[#f15a24] transition-colors">
+                      {step.number}
+                    </span>
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-50 text-[#f15a24] border border-orange-100 group-hover:scale-105 transition-transform">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-base font-bold text-slate-900 leading-snug group-hover:text-[#f15a24] transition-colors">
+                    {step.title}
+                  </h3>
+
+                  <p className="mt-2.5 text-xs text-slate-600 leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-400">
-                  0{idx + 1}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-gray-900">{step.title}</h3>
-                <p className="mt-2 text-sm text-gray-600 leading-relaxed">{step.description}</p>
+
+                <div className="mt-6 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-slate-400">
+                  <span>Phase {step.number}</span>
+                  <span className="text-slate-700">Milestone</span>
+                </div>
               </div>
             );
           })}
         </div>
+
       </div>
     </section>
   );
 }
-

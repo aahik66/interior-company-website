@@ -146,19 +146,21 @@ export default function VideoTestimonials() {
   return (
     <section id="testimonials" className="relative w-full bg-[#fdfdfd] py-12 sm:py-20 overflow-hidden">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Section Header matching screenshot */}
+        {/* Section Header matching reference website */}
         <div className="flex flex-col items-center text-center space-y-3" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-brand-500">
-            <span className="h-0.5 w-6 bg-brand-500" />
-            <span>Client Testimonials</span>
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#f15a24]">
+            <span className="h-[2px] w-6 bg-[#f15a24]" />
+            <span>Cinematic Walkthroughs</span>
+            <span className="h-[2px] w-6 bg-[#f15a24]" />
           </div>
 
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
-            Satisfaction Knows No Bounds
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+            Recently Completed Projects <br className="hidden sm:inline" />
+            <span className="text-slate-600 font-semibold">— Cinematic Video</span>
           </h2>
 
-          <p className="max-w-2xl text-xs sm:text-base text-gray-500 leading-relaxed font-normal px-2">
-            Clients are our most valued assets. We feel exceedingly fulfilled when their genuine joy pours out of the brims following each successful project handover.
+          <p className="max-w-3xl text-sm sm:text-base text-slate-600 leading-relaxed font-normal px-2">
+            Watch our latest interior design project walkthrough videos across Dhaka and Bangladesh, where creative concepts, smart planning, and practical functionality come together in beautifully finished spaces.
           </p>
         </div>
 

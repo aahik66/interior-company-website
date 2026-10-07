@@ -2,12 +2,13 @@ import SEOHead from "../components/SEOHead";
 import Hero from "../components/Hero";
 import MarqueeStrip from "../components/MarqueeStrip";
 import AboutSection from "../components/AboutSection";
-import Categories from "../components/Categories";
-import Process from "../components/Process";
 import VideoTestimonials from "../components/VideoTestimonials";
+import Categories from "../components/Categories";
+import WhyChooseUs from "../components/WhyChooseUs";
+import Process from "../components/Process";
 import Reviews from "../components/Reviews";
-import Careers from "../components/Careers";
 import FAQSection, { faqData } from "../components/FAQSection";
+import Careers from "../components/Careers";
 import ContactSection from "../components/ContactSection";
 
 export default function Home() {
@@ -129,9 +130,10 @@ export default function Home() {
       <Hero />
       <MarqueeStrip />
       <AboutSection />
-      <Categories />
-      <Process />
       <VideoTestimonials />
+      <Categories />
+      <WhyChooseUs />
+      <Process />
       <Reviews />
       <FAQSection />
       <Careers />

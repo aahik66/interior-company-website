@@ -137,14 +137,22 @@ export default function Hero() {
               </p>
             )}
 
-            {/* Action Button: Explore Portfolio */}
-            <div className="pt-1.5 sm:pt-2">
+            {/* Action Buttons: Book Consultation & Explore Portfolio */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href="https://wa.me/8801739835017?text=Hello%20Dimension%20Composition!%20I%20would%20like%20to%20book%20a%20free%20interior%20consultation."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[#f15a24] hover:bg-[#e04712] px-5 py-2.5 text-xs sm:text-sm font-bold text-white transition-all shadow-md hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <span>Book Free Consultation</span>
+                <HiOutlineArrowRight className="h-3.5 w-3.5" />
+              </a>
               <Link
                 to="/portfolio"
-                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/40 hover:bg-white/15 hover:border-white/40 px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-[13px] font-medium text-slate-200 hover:text-white backdrop-blur-md transition-all duration-200 shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-black/40 hover:bg-white/15 hover:border-white/40 px-5 py-2.5 text-xs sm:text-sm font-medium text-slate-200 hover:text-white backdrop-blur-md transition-all duration-200 shadow-md hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span>Explore Portfolio</span>
-                <HiOutlineArrowRight className="h-3.5 w-3.5 text-slate-300" />
               </Link>
             </div>
           </div>
