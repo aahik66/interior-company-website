@@ -6,6 +6,9 @@ services:
     region: singapore
     buildCommand: npm install
     startCommand: node server/index.js
+    domains:
+      - dimensioncomposition.com
+      - www.dimensioncomposition.com
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
